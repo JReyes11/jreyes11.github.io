@@ -176,6 +176,13 @@ ul {
     width: auto;
     padding: 12px 20px;
   }
+  #headerRight {
+    font-family: Verdana, sans-serif;
+    text-align: left;
+    color: #1648dc;
+    font-size: 15px;
+    overflow-x: auto;
+  }
 }
 
 /* For smaller devices (min-width: 390px) */
@@ -263,4 +270,5 @@ ul {
   .title-text {
     width: auto;
   }
+
 }
