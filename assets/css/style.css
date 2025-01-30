@@ -84,9 +84,7 @@ h2 {
 * {
   box-sizing: border-box;
 }
-.row {
-  border-color: #4204ff;
-}
+
 .column {
   float: left;
   padding: 10px;
@@ -128,6 +126,7 @@ span {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: #ffffff29;
 }
+
 .header {
   position: fixed;
   background: #ffffff linear-gradient(#ffffff96, #ffffffa8);
@@ -149,7 +148,7 @@ section {
 
 ul {
   list-style: disc inside;
-  padding-left: 20px;
+  padding-left: 5px;
 }
 
 .content {
@@ -159,7 +158,30 @@ ul {
   background-color: #ffffff;
 }
 
+#bulletPoints {
+  top: 0%;
+  left: 0%;  
+  padding: 0 2px;
+  
+}
+
+/* Screens larger than 764 */
 @media (min-width: 764px) {
+  .row {
+    max-width: 100%;
+    padding: 3px;
+    border-color: #4204ff;
+    display: flex;
+  }
+
+  .left-column {
+    flex: 0 0 50%; 
+  }
+  
+  .right-column {
+    flex: 0 0 50%; 
+  }
+
   body {
     font-size: 18px;
   }
@@ -183,10 +205,29 @@ ul {
     font-size: 15px;
     overflow-x: auto;
   }
+  
 }
 
 /* For smaller devices (min-width: 390px) */
 @media (min-width: 390px) and (max-width: 764px) {
+  .row {
+    max-width: 100%;
+    padding: 3px;
+    border-color: #4204ff;
+    display: flex;
+  }
+
+  .left-column {
+
+    flex: 0 0 50%; 
+  }
+  
+  .right-column {
+
+    flex: 0 0 50%; 
+
+  }
+
   .main-content {
     margin-left: 4%;
     top: 17%;
@@ -216,9 +257,10 @@ ul {
     padding: 10px;
   }
 
+ 
   ul {
     list-style: disc inside;
-    padding-left: 20px;
+    padding-left: 5px;
   }
 
   .container {
@@ -237,12 +279,15 @@ ul {
     max-width: 100%;
     padding: 3px;
     border-color: #4204ff;
+    display: flex;
   }
 
-  .column {
-    float: left;
-    padding: 12px;
-    max-width: 100%;
+  .left-column {
+    flex: 0 0 35%; /* Takes up 35% of the row */
+  }
+  
+  .right-column {
+    flex: 0 0 65%; /* Takes up 65% of the row */
   }
 
   .section {
@@ -255,10 +300,7 @@ ul {
     font-size: 28px; /* Intermediate size */
   }
 
-  ul {
-    list-style: disc inside;
-    padding-left: 20px;
-  }
+
 
   .content {
     padding: 0 18px;
@@ -270,5 +312,5 @@ ul {
   .title-text {
     width: auto;
   }
-
+ 
 }
