@@ -137,6 +137,19 @@ span {
   box-shadow: 12px 0 15px rgba(0, 0, 0, 0.1);
 }
 
+#profileHeader {
+  /* position: fixed; */
+  background: #ffffff linear-gradient(#ffffff96, #ffffffa8);
+  margin-top: 0.5vh;
+  margin-left: 0.5vh;
+  margin-right: 0.5vh;
+  margin-bottom: 0.5vh;
+  background: #ffffff;
+  padding: 10px;  
+  max-width: 100%;
+  /* box-shadow: 12px 0 15px rgba(0, 0, 0, 0.1); */
+}
+
 section {
   margin-top: 0.5vh;
   margin-left: 0.5vh;
