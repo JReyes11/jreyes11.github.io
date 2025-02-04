@@ -12,7 +12,7 @@ body {
   min-height: calc(100% - 100px);
 }
 .wrapper {
-  width: 740px;
+  width: 1000px;
   margin: 0 auto;
   background: #dedede;
   border-radius: 8px;
@@ -39,7 +39,7 @@ h2 {
   color: #1648dc;
   font-size: 30px;
   overflow-x: auto;
-}
+}rw
 .title-sub-text {
   font-family: American Typewriter, serif;
   color: #000000;
@@ -139,14 +139,14 @@ span {
 
 #profileHeader {
   /* position: fixed; */
-  background: #ffffff linear-gradient(#ffffff96, #ffffffa8);
   margin-top: 0.5vh;
   margin-left: 0.5vh;
   margin-right: 0.5vh;
   margin-bottom: 0.5vh;
-  background: #ffffff;
+  background: #bcbaba;
   padding: 10px;  
   max-width: 100%;
+  font-size: 25px;
   /* box-shadow: 12px 0 15px rgba(0, 0, 0, 0.1); */
 }
 
@@ -218,6 +218,10 @@ ul {
     font-size: 15px;
     overflow-x: auto;
   }
+
+  #mobileHeader {
+    
+  }
   
 }
 
@@ -288,20 +292,6 @@ ul {
     max-width: 100%;
     padding: 0px;
   }
-  .row {
-    max-width: 100%;
-    padding: 3px;
-    border-color: #4204ff;
-    display: flex;
-  }
-
-  .left-column {
-    flex: 0 0 35%; /* Takes up 35% of the row */
-  }
-  
-  .right-column {
-    flex: 0 0 65%; /* Takes up 65% of the row */
-  }
 
   .section {
     border-color: #4204ff;
@@ -312,8 +302,6 @@ ul {
   header h1 {
     font-size: 28px; /* Intermediate size */
   }
-
-
 
   .content {
     padding: 0 18px;
