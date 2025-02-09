@@ -1,7 +1,7 @@
 /*!
-* Start Bootstrap - Resume v1.0.0 (https://jreyes11.github.io)
-* Copyright 2013-2025 undefined
-* Licensed under MIT (https://github.com/StartBootstrap/online-resume/blob/master/LICENSE)
+* Start Bootstrap - Resume v7.0.6 (https://startbootstrap.com/theme/resume)
+* Copyright 2013-2025 Start Bootstrap
+* Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-resume/blob/master/LICENSE)
 */
 //
 // Scripts
