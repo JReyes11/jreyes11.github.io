@@ -1932,6 +1932,13 @@ progress {
   -webkit-overflow-scrolling: touch;
 }
 
+@media (max-width: 390.00px) {
+  .table-responsive-sm {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
 @media (max-width: 575.98px) {
   .table-responsive-sm {
     overflow-x: auto;
@@ -10968,5 +10975,24 @@ section.resume-section .resume-section-content {
     padding-right: 3rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
+  }
+}
+
+.responsive-image {
+  width: 100%; /* Default for smaller screens */
+  height: auto;
+}
+
+@media (min-width: 390px) {
+  /* Tablet and larger screens */
+  .responsive-image {
+    width: 30%;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* Desktop screens */
+  .responsive-image {
+    width: 50%;
   }
 }
