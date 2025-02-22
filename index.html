@@ -226,17 +226,27 @@
                     
                     <div class="subheading mb-2"><b>Playwright Test Automation</b></div>                    
                     <p>Github: <a href="https://github.com/JReyes11/playwright_ts">Playwright_ts</a></p>                    
-                    <p class="mb-0">A test automation project that leverages Playwright and TypeScript. 
-                        Project is designed to point towards a local instance of the "Cypress-RealWorld" application. Setup instructions are available in the projects README.</p>
+                    <p class="mb-0">A test automation project that leverages Playwright and TypeScript, utilizing the page objects and fixtures modal. Test cases include UI validation assertions, along with
+                        intercepting network requests, mocking the response and viewing the altered data in the UI.<br><br>
+                        Project is designed to run against a local instance of the "Real World" app developed by Cypress.  Setup instructions are available in the projects README.</p>
                     <br>
                     <div class="subheading mb-2"><b>API Mock Server</b></div>                    
                     <p>Github: <a href="https://github.com/JReyes11/mock-server">Mock Server</a></p>                    
-                    <p class="mb-0">A local backend server that returns datasets when making API requests to respective endpoints. 
-                        Ideal for testing, prototyping and API test automation development without needing a live backend.                        
-                        Additional endpoints and datasets can be added by modifying the db.json file.                       
+                    <p class="mb-0">This project sets up a local API mock server using the json-server library. 
+                        It serves user, product, and order datasets in JSON format, enabling simulated API requests to various endpoints. 
+                        Ideal for test automation development without relying on a live backend.                      
                     </p>
-                    <br> Example: Using cURL to request data from the /users endpoint. <br>
-                    <img src="./assets/img/mockServer-curl-users.gif">
+                    <br> 
+                    <b>Examples</b>
+                    <br>
+                    GET request: http://localhost:3000/users <br>
+                    <img src="./assets/img/mock-server-users.gif">
+                    <br><br>
+                    GET request: http://localhost:3000/products <br>
+                    <img src="./assets/img/mock-server-products.gif">
+                    <br><br>
+                    GET request: http://localhost:3000/orders <br>
+                    <img src="./assets/img/mock-server-orders.gif">
 
 
                     <br><br><br>                    
