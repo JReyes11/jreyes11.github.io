@@ -306,7 +306,12 @@ figure {
   margin: 0 0 1rem;
 }
 
-img,
+img {
+  max-width: 100%;  /* Prevents overflow */
+  height: auto;     /* Maintains aspect ratio */
+  display: block;   /* Removes extra space below inline images */  
+}
+
 svg {
   vertical-align: middle;
 }

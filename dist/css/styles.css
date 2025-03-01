@@ -46,7 +46,6 @@
   --bs-secondary-rgb: 108, 117, 125;
   --bs-success-rgb: 25, 135, 84;
   --bs-info-rgb: 13, 202, 240;
-  --bs-blue2-rgb: 30, 144, 255;
   --bs-warning-rgb: 255, 193, 7;
   --bs-danger-rgb: 220, 53, 69;
   --bs-light-rgb: 248, 249, 250;
@@ -306,7 +305,12 @@ figure {
   margin: 0 0 1rem;
 }
 
-img,
+img {
+  max-width: 100%;  /* Prevents overflow */
+  height: auto;     /* Maintains aspect ratio */
+  display: block;   /* Removes extra space below inline images */
+}
+
 svg {
   vertical-align: middle;
 }
@@ -642,6 +646,12 @@ progress {
   padding-left: calc(var(--bs-gutter-x) * 0.5);
   margin-right: auto;
   margin-left: auto;
+}
+@media (max-width: 430px) {
+  .responsive-image {
+    max-width: 80%; /* Ensures it scales with container */
+    height: auto; /* Maintains aspect ratio */
+  }
 }
 
 @media (min-width: 576px) {
@@ -8054,12 +8064,6 @@ textarea.form-control-lg {
 .text-info {
   --bs-text-opacity: 1;
   color: rgba(var(--bs-info-rgb), var(--bs-text-opacity)) !important;
-}
-
-
-.text-blue2 {
-  --bs-text-opacity: 1;
-  color: rgba(var(--bs-blue2-rgb), var(--bs-text-opacity)) !important;
 }
 
 .text-warning {
