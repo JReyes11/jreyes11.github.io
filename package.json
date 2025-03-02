@@ -24,7 +24,8 @@
     "homepage": "https://jreyes11.github.io",
     "license": "MIT",
     "dependencies": {
-        "bootstrap": "5.2.3"        
+        "bootstrap": "5.2.3",
+        "tech-stack-icons": "^2.1.0"
     },
     "devDependencies": {
         "autoprefixer": "10.4.14",
