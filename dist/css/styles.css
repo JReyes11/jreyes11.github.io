@@ -11654,6 +11654,14 @@ body::before {
   color: var(--muted);
 }
 
+.post-sublead {
+  max-width: 75rem;
+  margin-bottom: 0;
+  font-size: 1.0rem;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
 .post-stream {
   display: grid;
   gap: 1.6rem;
