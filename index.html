@@ -1,351 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-    <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-GLZF9DT8Q5"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-GLZF9DT8Q5');
-        </script>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Jose Reyes</title>
-        
-        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
-        
-    </head>
-    <body id="page-top">
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
-            <a class="navbar-brand js-scroll-trigger" href="#page-top">
-                <span class="d-block d-lg-none">Jose F. Reyes</span>
-                <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" draggable="false" src="assets/img/profile-photo.png" alt="Profile Photo" /></span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#introduction">Introduction</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#experience">Experience</a></li>                                   
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#skills">Skills</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a></li>      
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="./resume/JoseReyesResume.pdf">Resume</a></li>                    
-                </ul>
+  <head>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-GLZF9DT8Q5"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-GLZF9DT8Q5");
+    </script>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta
+      name="description"
+      content="Jose Reyes writes about Playwright, Node.js, API testing, and quality engineering workflows."
+    />
+    <meta name="author" content="Jose Reyes" />
+    <title>Jose Reyes | Quality Engineering Blog</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+    <script
+      src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Muli:400,400i,700,800"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="css/styles.css" rel="stylesheet" />
+    <script src="./components/header.js"></script>
+  </head>
+  <body data-base-path=".">
+    <main class="content-shell blog-landing">
+      <section class="blog-hero">
+        <p class="page-eyebrow">Quality Engineering Blog</p>
+        <h3>Notes from the front lines of automation and release confidence.</h3>
+        <p class="page-intro">
+          Practical write-ups on Playwright, Node.js tooling, API validation,
+          and the small workflow decisions that help teams ship with more
+          confidence.
+        </p>
+      </section>
+
+      <section class="post-stream" aria-label="Latest blog posts">
+        <article class="post-card">
+          <a class="post-card-media" href="./blog.html" aria-label="Read more about Playwright setup patterns">
+            <img
+              src="assets/img/playwright.gif"
+              alt="Animated preview of Playwright automation tests"
+            />
+          </a>
+          <div class="post-card-copy">
+            <div class="post-card-meta">
+              <span class="post-tag">Playwright</span>
+              <time datetime="2026-04-02">April 2, 2026</time>
             </div>
-        </nav>
-        <!-- Page Content-->
-        <div class="container-fluid p-0">
-            <!-- About-->
-            <section class="resume-section" id="introduction">
-                <div class="resume-section-content">
-                    <h1 class="mb-0">
-                        Jose
-                        <span class="text-primary">Reyes</span>
-                    </h1>
-                    <div class="subheading mb-5">
-                        Quality Advocate · Test Automation Engineer · SDET · Austin, Tx                                                  
-                    </div>                      
-                    <hr>
-                    <h3 class="mb-3 text-primary">Introduction</h3>                        
-                    
-                      <p>
-                        Over the years, I've worn many hats in the quality space—tester, debugger, problem-solver, mentor, and occasional bug whisperer.
-                        I've had the priviledge of working with a variety of frameworks ( Selenium, Cypress, Playwright, WebDriverIO, Jest) to develop
-                         and deploy robust, sustainable test automation solutions in CI/CD. 
-                        <br><br>
-                        I'm always eager to explore new tools and technologies, continuously refining my approach to test automation. Whether it's learning a new framework, 
-                        optimizing test execution times, or enhancing CI/CD pipelines, I'm driven by the challenge of making quality engineering efficient, effective, and impactful.
-                        <br><br>
-                        In addition to test automation, I'm also passionate about scripting. Whether its a script to generate test data via a series of API requests, retreiving logs from a 
-                        third party service such as Datadog or automating tedious manual tasks, I find joy in writing code that makes life easier for developers and testers alike.
-                        <br><br>
-                      </p>
-                      <br>
-                
+            <h2>
+              <a href="./blog.html">Building a Playwright setup that stays readable as tests scale</a>
+            </h2>
+            <p class="post-card-subtext">
+              A walkthrough of the project structure, fixtures, and baseline
+              conventions that make Playwright suites easier to maintain when a
+              team moves from a handful of tests to a real regression layer.
+            </p>
+            <a class="read-more-link" href="./blog.html">Read more</a>
+          </div>
+        </article>
 
-                    <div class="social-icons">
-                        <a class="social-icon" href="mailto:JF.Reyes925@gmail.com"><i class="fa-sharp-duotone fa-regular fa-envelope"></i></a>
-                        <a class="social-icon" href="https://www.linkedin.com/in/jose-7-reyes"><i class="fab fa-linkedin-in"></i></a>
-                        <a class="social-icon" href="https://github.com/JReyes11"><i class="fab fa-github"></i></a>                                                
-                    </div>
-                </div>
-            </section>
-            <hr class="m-0" />
+        <article class="post-card">
+          <a
+            class="post-card-media"
+            href="./posts/api-testing-with-jest.html"
+            aria-label="Read more about API testing with Jest"
+          >
+            <img
+              src="assets/img/jest-yarn.gif"
+              alt="Animated preview of API testing workflows with Jest and Yarn"
+            />
+          </a>
+          <div class="post-card-copy">
+            <div class="post-card-meta">
+              <span class="post-tag">NodeJS</span>
+              <time datetime="2026-03-18">March 18, 2026</time>
+            </div>
+            <h2>
+              <a href="./posts/api-testing-with-jest.html">API testing with Jest and Node.js without the brittle setup</a>
+            </h2>
+            <p class="post-card-subtext">
+              A simple pattern for validating response contracts, organizing
+              fixtures, and keeping your API test layer fast enough to run
+              constantly during feature work.
+            </p>
+            <a class="read-more-link" href="./posts/api-testing-with-jest.html">Read more</a>
+          </div>
+        </article>
 
+        <article class="post-card">
+          <a
+            class="post-card-media"
+            href="./posts/mock-server-workflows.html"
+            aria-label="Read more about mock server workflows"
+          >
+            <img
+              src="assets/img/mock-server-create-users.gif"
+              alt="Animated preview of mock server request creation"
+            />
+          </a>
+          <div class="post-card-copy">
+            <div class="post-card-meta">
+              <span class="post-tag">API Design</span>
+              <time datetime="2026-02-09">February 9, 2026</time>
+            </div>
+            <h2>
+              <a href="./posts/mock-server-workflows.html">Using mock servers to unblock UI and API work in parallel</a>
+            </h2>
+            <p class="post-card-subtext">
+              How mock services help teams validate edge cases earlier, reduce
+              waiting on dependencies, and build more predictable test data for
+              frontend and backend collaboration.
+            </p>
+            <a class="read-more-link" href="./posts/mock-server-workflows.html">Read more</a>
+          </div>
+        </article>
+      </section>
+    </main>
 
-            <!-- Experience-->
-            <section class="resume-section" id="experience">
-                <div class="resume-section-content">
-                    <h3 class="mb-3 text-primary">Experience</h3>                                        
-                    <div class="d-flex flex-column flex-md-row justify-content-between mb-3">                   
-                        <div class="flex-grow-1">
-                            <h4 class="mb-0">Software Development Engineer in Test</h4>
-                            <div class="subheading mb-4 text-black">Everly Health •
-                                <span class="text-black-50">Dec 2021 - Dec 2024</span>                               
-                            </div>
-                            <p>Led cross-functional test automation efforts utilizing Cypress and JavaScript, along with Jest and TypeScript to deliver robust automation coverage in CI/CD pipelines.
-                                 Highlights include reducing regression cycles and decreasing overall failure percentages down to 9%. Developed custom tooling utilized by the quality assurance team to accelerate
-                                 manual testing efforts including custom chrome extensions and data validation scripts written using Node.js.                                                                                                 
-                            </p>
-                        </div>                        
-                    </div>
-
-                    <div class="d-flex flex-column flex-md-row justify-content-between mb-3">
-                        <div class="flex-grow-1">
-                            <h4 class="mb-0">Senior Quality Assurance Engineer</h4>
-                            <div class="subheading mb-4 text-black">Everly Health •
-                                <span class="text-black-50">Jul 2021 - Dec 2021</span>
-                            </div> 
-                            <p>Developed detailed testing strategies and robust test plans while engineering automation tests in parallel as a member of an Agile/Scrum team. Leveraged external API's
-                                including Datadog, AWS and Mixpanel to update test case repository with test results. Performed end-to-end testing to ensure regression free delivery to production. </p>
-                        </div>                        
-                    </div>
-                    <div class="d-flex flex-column flex-md-row justify-content-between mb-3">
-                        <div class="flex-grow-1">
-                            <h4 class="mb-0">Senior Software Test Engineer</h4>
-                            <div class="subheading mb-4 text-black">Compeat • 
-                                <span class="text-success text-black-50">Sep 2020 - Jul 2021</span>
-                            </div>
-                            <p>Lead the manual and automation testing efforts for restaurant management (SaaS) application.
-                                Document detailed bug reports and help desk documentation for troubleshooting production issues.
-                                
-                                Accomplishments include increasing automation test coverage by 40% in the first 90 days, along with the implementation of API Layer test suites and validations in CI/CD pipelines.</p>
-                        </div>                        
-                    </div>
-                    
-                    <div class="d-flex flex-column flex-md-row justify-content-between mb-3">
-                        <div class="flex-grow-1">
-                            <h4 class="mb-0">Senior Software QA Engineer</h4>
-                            <div class="subheading mb-4 text-black">Procore Technologies • 
-                                <span class="text-black-50">Aug 2019 - Sep 2020</span>                                
-                            </div>
-                            <p>Perform manual testing for the Bidding and Pre-qualification features.
-                                Document detailed bug reports, prepare test plans and test cases while developing Cypress automation test coverage in parallel.                                 
-                                Accomplishments include transitioning automation test suites away from their legacy framework to utilize the Cypress.io framework, along with ensuring their successful implementation in CI/CD.</p>
-                        </div>                        
-                    </div>
-
-                    <div class="d-flex flex-column flex-md-row justify-content-between mb-3">
-                        <div class="flex-grow-1">
-                            <h4 class="mb-0">Senior Software QA Engineer</h4>
-                            <div class="subheading mb-4 text-black">HotSchedules • 
-                                <span class="text-black-50">Nov 2017 - Aug 2019</span>
-                            </div>
-                            <p>Lead the manual and automation testing efforts for restaurant management software application (SaaS). Develop and maintain automation tests using Selenium Webdriver, Protractor, Jasmine and Mocha.
-                                Accomplishments include developing a repository of API scripts using JavaScript and Node.js to validate successful deployments to production. This was later expanded to include functionality applicable to the QA environment, specifically creating user accounts, generating mock data and enabling/disabling feature flags in LaunchDarkly.                                    
-                            </p>
-                        </div>                        
-                    </div>
-                    <div class="d-flex flex-column flex-md-row justify-content-between mb-3">
-                        <div class="flex-grow-1">
-                            <h4 class="mb-0">Senior Software QA Engineer</h4>
-                            <div class="subheading mb-4 text-black">Spotify • 
-                                <span class="text-black-50">Sep 2012 - Sep 2017</span></div>
-                            <p>Performed manual and regression testing for the Friends Activity, Year in Review (Wrapped) and Spotify for Artists teams. Create automation tests using Java and TestNG.
-                                Accomplishments include the development of Python scripts to identify inaccurate or missing content from Artist pages and catalogues, leading to hundreds of adjustments over a 5 year period.                                
-                            </p>
-                        </div>                        
-                    </div>
-                </div>
-            </section>
-            <hr class="m-0" /> 
-            
-            
-            
-            <!-- Skills-->             
-            <section class="resume-section" id="skills">
-                <div class="resume-section-content">
-                    <h3 class="mb-3 text-primary">Skills</h3>                                        
-                    <div class="container text-left id="tech-stack-icons">
-                        <div class="subheading mb-4">Tools, Languages and Frameworks</div>
-                        <div class="row">                            
-                          <div class="col custom-col">
-                            <center><img src="./assets/icons/cypress.svg" alt="Cypress" width="34"> Cypress</center>
-                          </div>
-                          <div class="col custom-col">
-                            <center><img src="./assets/icons/playwright.png" alt="Playwright" width="40"> Playwright</center>
-                          </div>
-                          <div class="col custom-col">
-                            <center><img src="./assets/icons/webdriverIO.png" alt="WebdriverIO" width="30"> WebdriverIO</center>
-                          </div>                          
-                        <div class="col custom-col">
-                            <center><img src="./assets/icons/selenium.svg" alt="Selenium" width="35"> Selenium</center>
-                          </div>
-                          <div class="col custom-col">
-                            <center><img src="./assets/icons/appium.png" alt="Appium" width="35"> Appium</center>
-                            </div> 
-                            <div class="col custom-col">
-                                <center><img src="./assets/icons/jest.svg" alt="Jest" width="33"> Jest</center>
-                            </div>                       
-                        </div>
-                        <br>                        
-                        <div class="row">    
-                            <div class="col custom-col">
-                                <center><img src="./assets/icons/nodejs.svg" alt="Node.js" width="40"> Node.js</center>
-                            </div>           
-                            <div class="col custom-col">
-                                <center><img src="./assets/icons/javascript.svg" alt="JavaScript" width="40"> JavaScript</center>
-                            </div>
-                            
-                            <div class="col custom-col">
-                                <center><img src="./assets/icons/typescript.svg" alt="TS" width="40"> TypeScript</center>
-                            </div>
-                            <div class="col custom-col">
-                                <center><img src="./assets/icons/python.svg" alt="Python" width="40"> Python</center>
-                            </div>
-                            <div class="col custom-col">
-                                <center><img src="./assets/icons/ruby.svg" alt="Ruby" width="40"> Ruby</center>
-                            </div>
-                            <div class="col custom-col">
-                                <center><img src="./assets/icons/kubernetes.svg" alt="Kubernetes" width="40"> Kubernetes</center>
-                            </div>  
-                            
-                          </div>
-                          <br>                          
-                          <div class="row">   
-                            <div class="col custom-col">
-                                <center><img src="./assets/icons/aws.svg" alt="AWS" width="40"> AWS</center>
-                            </div> 
-                            <div class="col custom-col">
-                                <center><img src="./assets/icons/gitlab.svg" alt="Gitlab" width="40"> Gitlab</center>
-                            </div>  
-                            <div class="col custom-col">
-                                <center><img src="./assets/icons/github.svg" alt="Github" width="40"> Github</center>
-                            </div>   
-                            <div class="col custom-col">
-                                <center><img src="./assets/icons/jenkinsIcon.png" alt="Jenkins" width="33"> Jenkins</center>
-                            </div>                    
-                            <div class="col custom-col">
-                                <center><img src="./assets/icons/circleci.svg" alt="CircleCI" width="40"> CircleCI</center>
-                            </div> 
-                            <div class="col custom-col">
-                                <center><img src="./assets/icons/webpack.svg" alt="Webpack" width="40"> Webpack</center>
-                            </div>                                                                                  
-                          </div>
-
-                          <br>                          
-                          <div class="row">   
-                            <div class="col custom-col">
-                                <center><img src="./assets/icons/npm.svg" alt="NPM" width="40"> NPM</center>
-                            </div> 
-                            <div class="col custom-col">
-                                <center><img src="./assets/icons/yarn.svg" alt="Yarn" width="40"> Yarn</center>
-                            </div> 
-                            <div class="col custom-col">
-                                <center><img src="./assets/icons/homebrew.svg" alt="Homebrew" width="40"> Homebrew</center>
-                            </div>  
-                            <div class="col custom-col">
-                                <center><img src="./assets/icons/rubyOnRails.png" alt="RubyOnRails" width="65">Ruby On Rails</center>
-                            </div> 
-                            <div class="col custom-col">
-                                <center><img src="./assets/icons/datadog.svg" alt="DataDog" width="40">DataDog</center>
-                            </div>                    
-                            <div class="col custom-col">
-                                <center><img src="./assets/icons/postman.svg" alt="Postman" width="40"> Postman</center>
-                            </div>                                                                                  
-                          </div>
-                          <br>
-                      </div>
-                    </div>    
-                </div>
-            </section>
-            <hr class="m-0" />
-            <!-- Portfolio-->
-            <section class="resume-section" id="portfolio">
-                <div class="resume-section-content">
-                    <h3 class="mb-3 text-primary">Portfolio</h3>
-                    <br>
-                    
-                    <div class="subheading mb-2"><b>Playwright: Test Automation</b></div>                    
-                    <p>Github: <a href="https://github.com/JReyes11/playwright_ts">Playwright_ts</a></p>                    
-                    <p class="mb-0">A test automation project that leverages Playwright and TypeScript, utilizing the page objects and fixtures model. Test cases include UI validation assertions, along with
-                        intercepting network requests, mocking the response and viewing the altered data in the UI.<br><br>
-                        Project is designed to run against a local instance of the "Real World" app developed by Cypress.  Setup instructions are available in the projects README.</p>
-                    <br>
-                    <img src="./assets/img/playwright.gif">
-                    <br>
-                    <hr>
-                    <br>
-                    
-                    <div class="subheading mb-3"><b>WebdriverIO: Test Automation</b></div>    
-                    <p>Github: <a href="https://github.com/JReyes11/webdriverIO">WebdriverIO</a></p>                     
-                                   
-                    <p class="mb-0">A test automation project that leverages WebdriverIO and TypeScript, utilizing the page objects and fixtures model. 
-                        <br>
-                        <img src="./assets/img/webdriverIO.gif">
-                                                                
-                    <br>
-                    <hr>
-                    <br>
-
-                    <div class="subheading mb-2"><b>Jest: API Test Automation</b></div> 
-                    <p><p>Github: <a href="https://github.com/JReyes11/Jest-API-Tests">Jest-API-Tests</a></p> </p> 
-                    <p>
-                        An API test automation project using Jest and JavaScript to perform CRUD operations against 
-                        a local mock server powered by json-server. Like Playwright_ts, this project utilizes reusable 
-                        class methods to reduce redundancy and improve maintainability. Setup instructions can be found in the README.                                                                       
-                    </p>
-                    <br>
-                    <b>Example</b>
-                    <br>
-                    Testing the Orders Endpoint: <br>
-                    <img src="./assets/img/jest-yarn.gif">
-                    
-
-                    <br>
-                    <hr>
-                    <br>
-
-                    <div class="subheading mb-2"><b>API Mock Server</b></div>                    
-                    <p>Github: <a href="https://github.com/JReyes11/mock-server">Mock Server</a></p>                    
-                    <p class="mb-0">This project sets up a local API mock server using the json-server library. 
-                        It serves user, product, and order datasets in JSON format, enabling simulated API requests to various endpoints. 
-                        Ideal for test automation development without relying on a live backend.                      
-                    </p>
-                    <br> 
-                    <b>Examples</b>
-                    <br>
-                    Making GET requests to (/users, /products, /orders) endpoints on localhost. <br><br>
-                    <img src="./assets/img/mock-server-requests.gif">
-                    
-                    <br>
-                    <hr>
-                    <br>
-
-                    <div class="subheading mb-2"><b>Google Chrome Extension:  WeatherApp</b></div>                    
-                    <p>Github: Work In Progress</a></p>                    
-                    <p class="mb-0">A Chrome extension leveraging the WeatherAPI and RestCountiesAPI to deliver current weather conditions.</p>
-                    <br>
-                    <img src="./assets/img/WeatherAppParis.gif">
-                    
-                    <br>
-                    <hr>
-                    <br>
-
-                    <div class="subheading mb-2"><b>API Scripts: Data Validations</b></div>                    
-                    <p>Github: Work In Progress</a></p>                    
-                    <p class="mb-0">1. Leveraging Node.js to develop data validation scripts as part of regression testing cycle.</p>
-                    <br><br>                                        
-                    <img src="./assets/img/api_validation.gif">
-                    <br><br>
-
-                </div>
-            </section>
-            <hr class="m-0" />                            
-        </div>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-    </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/scripts.js"></script>
+  </body>
 </html>
