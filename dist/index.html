@@ -66,6 +66,43 @@
       </section>
 
       <section class="post-stream" aria-label="Latest blog posts">
+
+        <article class="post-card">
+          <a
+            class="post-card-media"
+            href="./local-llm.html"
+            aria-label="Implementing a Lightweight MCP Client in Node.js"
+          >
+            <img
+              src="assets/img/openWebUI.gif"
+              alt="dddLocal LLM testing workflows with Node.js"
+            />
+          </a>
+          <div class="post-card-copy">
+            <div class="post-card-meta">
+              <span class="post-tag">LLM</span>
+              <span class="post-tag">Ollama</span>
+              <span class="post-tag">Qwen2.5</span>
+              <time datetime="2026-04-05">Feb 11, 2026</time>
+            </div>
+            <h2>
+              <a href="./local-llm.html"
+                >Experimenting with local LLM's</a
+              >
+            </h2>
+            <p class="post-card-subtext">
+              A few weeks ago I set up a local LLM environment using Ollama and Qwen2.5.
+              In this post I share some of the early experiments and workflows I've found useful for testing and validating local LLM responses.
+            </p>
+          </div>
+             
+            </h2>
+          
+            <a class="read-more-link" href="./posts/local-llm.html">Read more</a>
+          </div>
+        </article>
+
+
         <article class="post-card">
           <a
             class="post-card-media"
@@ -89,8 +126,8 @@
             </h2>
             <p class="post-card-subtext">
               Recently I was tasked with testing the functionality of a Model Context Protocol (MCP) server. 
-              The goal was to validate the server's behavior when sending a query and receiving a response.
-              After doing a bit of research, I decided to build a simple MCP client in Node.js.
+              The short term goal: Ensure a valid response is returned when submitting a query. 
+              The long term goal: Build a lightweight client that could be used for validation in CI/CD.
             </p>
           </div>
              

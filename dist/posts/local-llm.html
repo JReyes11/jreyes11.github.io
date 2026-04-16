@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-GLZF9DT8Q5"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-GLZF9DT8Q5");
+    </script>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta
+      name="description"
+      content="Setting up a local LLM environment with Ollama and Qwen2.5 for testing and development workflows."
+    />
+    <meta name="author" content="Jose Reyes" />
+    <title>Local LLM Testing Workflows | Jose Reyes</title>
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico" />
+    <script
+      src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Muli:400,400i,700,800"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="../css/styles.css" rel="stylesheet" />
+    <script src="../components/header.js"></script>
+  </head>
+  <body data-base-path="..">
+    <main class="content-shell post-page">
+      <article class="post-article">
+        <div class="post-article-meta">
+          <span class="post-tag">API Design</span>
+          <time datetime="2026-02-09">February 9, 2026</time>
+        </div>
+        <h1>Experimenting with local LLM's</h1>
+        <p class="post-lead">
+          A few weeks ago I set up a local LLM environment using Ollama and Qwen2.5.
+          In this post I share some of the early experiments and workflows I've found useful for testing and validating local LLM responses.
+        </p>
+        <figure class="post-feature">
+          <img
+            src="../assets/img/openWebUI.gif"
+            alt="Animated preview of local LLM testing workflows with Node.js"
+          />
+        </figure>
+        <div class="post-content">
+          <p>
+            Local LLM's are a great way to experiment with model responses and test out different prompts without the latency and cost of hitting 
+            a remote API. Knowing there are no "out of pocket" costs or token limits puts my mind at ease and encourages more exploratory testing.
+            
+            
+            By running the model locally, you can iterate much faster and have more control over the environment.
+          </p>
+          <p>
+            I've found this to be especially useful for testing edge cases and unexpected inputs. When working with a remote API, 
+            it can be cumbersome to set up test scenarios that trigger specific model behaviors. With a local LLM, 
+            I can easily craft prompts that explore those edge cases and see how the model responds in real time.
+          </p>
+          <p>
+            I’ve found this especially useful for seeded user flows and request
+            combinations that are cumbersome to reproduce in shared lower
+            environments. A focused mock layer can make both exploratory testing
+            and automated coverage more intentional.
+          </p>
+          <p>
+            When the real service catches up, the transition is smoother because
+            the expected behavior has already been exercised in code, UI states,
+            and test scenarios instead of living only in documentation.
+          </p>
+        </div>
+        <a class="back-link" href="../index.html">Back to all posts</a>
+      </article>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/scripts.js"></script>
+  </body>
+</html>
