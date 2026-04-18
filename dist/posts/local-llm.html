@@ -46,45 +46,189 @@
     <main class="content-shell post-page">
       <article class="post-article">
         <div class="post-article-meta">
-          <span class="post-tag">API Design</span>
-          <time datetime="2026-02-09">February 9, 2026</time>
+          <time datetime="2026-02-11">Feb 11, 2026</time>
+          <span class="post-tag">AI</span>
+          <span class="post-tag">LLM</span>
+          <span class="post-tag">Ollama</span>
+          <span class="post-tag">llama3.x</span>
+          <span class="post-tag">Qwen2.5-Coder</span>
+          <span class="post-tag">Open-WebUI</span>
         </div>
-        <h1>Experimenting with local LLM's</h1>
-        <p class="post-lead">
-          A few weeks ago I set up a local LLM environment using Ollama and Qwen2.5.
-          In this post I share some of the early experiments and workflows I've found useful for testing and validating local LLM responses.
-        </p>
-        <figure class="post-feature">
-          <img
-            src="../assets/img/openWebUI.gif"
-            alt="Animated preview of local LLM testing workflows with Node.js"
-          />
-        </figure>
+        <h2>Experimenting with local LLM's</h2>
+        
+         
+
         <div class="post-content">
           <p>
-            Local LLM's are a great way to experiment with model responses and test out different prompts without the latency and cost of hitting 
-            a remote API. Knowing there are no "out of pocket" costs or token limits puts my mind at ease and encourages more exploratory testing.
+            Local LLM's are a great way to experiment with model responses and
+            testing out different prompts without having to worry about latency
+            and cost, not to mention that all of the information remains local
+            on your machine. 
+            </p>
+            <p>
             
-            
-            By running the model locally, you can iterate much faster and have more control over the environment.
+            When using applications such as ChatGPT, Claude,
+            Gemini, etc, it's advised not to submit queries that contain
+            sensitive information ( API Keys, passwords ) as your information is
+            sent out into the world - and may be used to train models. It's
+            comforting to know your LLM setup can be configured to keep all
+            information local. At first I was skeptical, so I turned off my
+            WiFi, submitted a query via the localhost API endpoint and was
+            amazed when a response was returned.
+            </p>
+            <p>
+               Don't get me wrong, there are
+            some drawbacks. 
+            <br>For example, an LLM running via Ollama have no
+            persistent memory outside of the current session. Once the session
+            is terminated, the history is gone, similar to deleting the local
+            storage in your web browser. 
+            In addition, certain models require specific resources (CPU/GPU, RAM) to run locally, so one must be mindful of the hardware 
+            requirements when selecting models to run. 
+             <br>                                                
+            Since my initial goal was to exclusively submit
+            queries via the localhost API using a general purpose model, this was not a deterrent. I started
+            off using the Llama 3.2 LLM and was having fun submitting queries about cats via the localhost API. 
+            </p>
+           
+
+
+            <h4>Sending a query via the localhost API</h4>
+            <p>
+              I created a simple script that contains a javascript function to submit a query via the localhost API.
+              <br>
+            <img
+              src="../assets/img/ollama_api_query.png"
+              alt="JavaScript function for submitting queries to the localhost API"
+            />
+              <br><br>
+            When runing the script from the terminal using node, the following response was returned.<br>
+            <img
+              src="../assets/img/ollama_api_response.png"
+              alt="Response from Local LLM"
+            />
+            </p>
+            <p>
+               Eventually I wanted explore models that could assist with queries specific to coding. Since I was at the very beginning of this journey, 
+              I went with the simplist model, Qwen2.5-Coder. There are a variety of models available to pull down and run locally via Ollama, 
+              which I touch on further in this post.
+              <br> <br>It was long before I realized that submitting non-cat related queries via the API was not the most efficient way to interact with these models.
+              This led me down the path of exploring local UI's that were user-friendly. With so many
+              options available, each with their pro's and con's, I decided to move forward with Open WebUI.
+            </p>
+   
+            <h4>Leveraging Open Web UI</h4>
+
+            <p>
+              Open WebUI is an open source project that provides a user-friendly interface for interacting with local LLM's.
+              The setup was pretty straightforward and the documentation was easy to follow.
+              The UI made it much easier to submit code snippets andread the responses. Over time I found myself using the UI more than the 
+              localhost API for testing out queries and iterating on prompts.
+              
+              
+              <br><br>
+              In the example below, I am using Open WebUI with Qwen2.5-Coder, asking about importing fixtures in Playwright.
+              
+            </p>
+          <img
+            src="../assets/img/openWebUI.gif"
+            alt="Open WebUI interface showing a conversation with a local LLM model"
+          />
+          <br>
+           
+              <h4>Conclusion</h4>
+              <p>
+              I can honestly say I enjoyed the journey. While I have yet to explore the collection of models available, the possibilities are endless,
+              limited by the hardware of my Mac Mini of course. Using Open WebUI is a game changer, in the sense that it allows for switching between models
+              without having to restart any services. I value the privacy hosting locally provides, not to mention the cost savings and zero internet 
+              dependencies. I look forward to exploring additional models and user interfaces in the future. 
+              </p>
+             
           </p>
+          <hr>
+          <h3>Setup and Installation</h3>
+          Below are the steps I took to set up my local LLM environment using Ollama and Open WebUI.
+          <br>
+          <h4>Install Ollama</h4>
           <p>
-            I've found this to be especially useful for testing edge cases and unexpected inputs. When working with a remote API, 
-            it can be cumbersome to set up test scenarios that trigger specific model behaviors. With a local LLM, 
-            I can easily craft prompts that explore those edge cases and see how the model responds in real time.
+          Download the offical installer from the Ollama website available for Mac, Linux and Windows.
+          <br> <a href="https://ollama.com/docs/installation" target="_blank">https://ollama.com/docs/installation</a>
           </p>
+
+          <h4>Pulling down Large Language Models (LLM's)</h4>
           <p>
-            I’ve found this especially useful for seeded user flows and request
-            combinations that are cumbersome to reproduce in shared lower
-            environments. A focused mock layer can make both exploratory testing
-            and automated coverage more intentional.
+            There are a variety of LLM's available to pull down and run locally via Ollama, depending on your use case and hardware capabilities.
+            For context, I have an M4 Mac Mini with 16GB of Unified RAM, so I focused on models that could run within those constraints.
+            <br><br>If you're just getting started, I recommended starting with the Llama 3.x model as it's a great general purpose model for testing out 
+            queries and getting a feel for how local LLM's work.
+            Models can be installed using the <i>ollama pull</i> command. For example: <code>ollama pull llama3.2</code>
+            <br><br> Below is a table of some of the more popular models available.
+            <br>
+            <table>
+    <thead>
+      <tr>
+        <th>LLM</th>
+        <th>Creator</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Llama 3.x</strong><span class="tag">General</span></td>
+        <td>Meta</td>
+        <td>Most downloaded model family on Ollama. Llama 3.1 8B is the recommended stable default for general use.</td>
+      </tr>
+      <tr>
+        <td><strong>Qwen2.5 / Qwen3</strong><span class="tag">Multilingual</span></td>
+        <td>Alibaba</td>
+        <td>Fastest-growing model family on Ollama. Strong multilingual support across 29 languages and best non-English performance.</td>
+      </tr>
+      <tr>
+        <td><strong>Qwen2.5-Coder</strong> <span class="tag">Coding</span></td>
+        <td>Alibaba</td>
+        <td>Top-tier coding model matching GPT-4o on HumanEval. Available in sizes from 0.5B to 32B.</td>
+      </tr>
+      <tr>
+        <td><strong>DeepSeek-R1</strong> <span class="tag">Reasoning</span></td>
+        <td>DeepSeek</td>
+        <td>Highly downloaded for reasoning and math tasks with chain-of-thought capabilities. Distilled variants available for lower-end hardware.</td>
+      </tr>
+      <tr>
+        <td><strong>Gemma 3 / 4</strong> <span class="tag">Vision</span></td>
+        <td>Google</td>
+        <td>Best for image understanding. Gemma 4 9B includes built-in tool calling for local agents and function calling at just 6GB RAM.</td>
+      </tr>
+      <tr>
+        <td><strong>Phi-4</strong> <span class="tag">Math</span></td>
+        <td>Microsoft</td>
+        <td>Best results per GB of VRAM for analytical tasks. Scores 80.4% on MATH benchmarks. Ideal for data analysis and logical reasoning.</td>
+      </tr>
+      <tr>
+        <td><strong>CodeLlama</strong> <span class="tag">Coding</span></td>
+        <td>Meta</td>
+        <td>Older but widely used coding model with the most mature fine-tuned ecosystem. Python-specialized variant remains competitive on constrained hardware.</td>
+      </tr>
+    </tbody>
+  </table>
           </p>
+
+          <h4>Installing Open WebUI</h4>
           <p>
-            When the real service catches up, the transition is smoother because
-            the expected behavior has already been exercised in code, UI states,
-            and test scenarios instead of living only in documentation.
+          Open WebUI can be installed using pip:  <code>pip install open-webui</code><br>
+             Once installed, you can start the server via the command line with: <code>open-webui serve</code><br>
+            </p>
+            <img
+              src="../assets/img/openWebUI-terminal.png"
+              alt="Open WebUI interface showing a conversation with a local LLM model"
+            />
+           
+
+          <p>
+            This will start the Open WebUI server and you can access the interface by navigating to http://localhost:8080 in your web browser. 
+             From there, you can select the model you want to use and start submitting queries via the chat interface.
           </p>
         </div>
+       
         <a class="back-link" href="../index.html">Back to all posts</a>
       </article>
     </main>
