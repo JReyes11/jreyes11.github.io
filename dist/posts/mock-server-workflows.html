@@ -46,47 +46,128 @@
     <main class="content-shell post-page">
       <article class="post-article">
         <div class="post-article-meta">
-          <time datetime="2025-03-09">March 9, 2025</time>              
-          <span class="post-tag">Mock API Server</span>
-          <span class="post-tag">JSON</span>
-          <span class="post-tag">API Design</span>
+          <time datetime="2025-03-09">March 9, 2025</time>
+          <span class="post-tag">JSON Server</span>
+          <span class="post-tag">Jest</span>
+          <span class="post-tag">API Testing</span>
         </div>
-        <h2>Using mock servers to unblock UI and API work in parallel</h2>
+        <h2>Using JSON-Server + Jest for API Testing</h2>
         <p class="post-lead">
-          Mock servers are one of the easiest ways to remove waiting from a team
-          workflow, especially when frontend and backend work are moving on
-          different timelines.
+          I recently spent some time experimenting with JSON Server and Jest as
+          a lightweight way to write API tests without relying on an actual
+          backend service. It’s a great setup for learning,
+          prototyping, and even strengthening API automation fundamentals.
         </p>
-        <figure class="post-feature">
-          <img
-            src="../assets/img/mock-server-create-users.gif"
-            alt="Animated preview of mock server request creation"
-          />
-        </figure>
+        <br>
         <div class="post-content">
           <p>
-            A mock service gives the UI team something stable to build against
-            while backend contracts are still being finalized. That reduces idle
-            time, but it also gives QA a place to define edge cases much earlier
-            than they normally would.
+            When people think about API testing, they usually jump straight to testing against a real backend environment. 
+            In reality, sometimes this isn't practical for a variety of reasons:
+            <ul>
+              <li>The test data in the shared environment frequently changes.</li>              
+              <li>The backend is on a different timeline than the frontend work.</li>
+              <li>Rate limits are becoming a problem.</li>
+              <li>Reproducing error scenarios involves a complex series of steps.</li>
+            </ul>
           </p>
           <p>
-            The real value shows up when the mocks are treated as part of the
-            design conversation. Error responses, empty states, and validation
-            failures stop being late surprises because the team has already seen
-            them in a controlled environment.
-          </p>
+           As an SDET, we have to be flexible and find ways to work around these challenges. <br>
+           In some cases, this means using a mock server, such as "json-server" to create a stable API layer for testing.
+
+            Json-server is a great alternative to spinning up a full backend service when the goal is focused on API testing. 
+            It allows us to define custom endpoints and responses using simple JSON files, which can be especially useful for testing specific 
+            scenarios or edge cases that may be difficult to reproduce in a shared environment. <br><br>
+
+           Having a sandbox that we fully control allows us to focus on the real task at hand, writing solid api layer tests.
+           If structured properly, all that would be required to point the test repo to the real backend is updating the baseURL.                      
+         </p>
+         <h3>Installation and Configuration</h3>
           <p>
-            I’ve found this especially useful for seeded user flows and request
-            combinations that are cumbersome to reproduce in shared lower
-            environments. A focused mock layer can make both exploratory testing
-            and automated coverage more intentional.
+            Setting up JSON Server is pretty straightforward. You can install it globally using npm:
+            <pre><code>npm install -g json-server</code></pre>
+            <br>
+            Let's assume we want to create an endpoint called "/products" that returns a list of books. <br>
+            To do this, create a file in the root directory called "db.json" and add the following content:
           </p>
+
+          <pre><code>
+            {
+              "products": [
+                { 
+                  "id": "978-0-357-83307-0",
+                  "title": "The Adventures of Sherlock Holmes",
+                  "author": "Johann Wolfgang von Goethe",
+                  "genre": "Western",
+                  "department": "books",
+                  "price": 15
+                },
+                {
+                  "id": "978-1-75587-108-4",
+                  "title": "Second Treatise of Government",
+                  "author": "Miguel de Cervantes",
+                  "genre": "Mystery",
+                  "department": "books",
+                  "price": 15
+                },
+                {
+                  "id": "978-1-9821-4567-5",
+                  "title": "Slaughterhouse Five",
+                  "author": "Jacqueline Crooks",
+                  "genre": "Detective",
+                  "department": "books",
+                  "price": 16
+                }
+              ]            
+            }
+          </code></pre>
+  <br>
+  <p>
+    Make sure to save the file. Next we can start the server by running the following command in the terminal:
+    <pre><code>json-server --watch db.json</code></pre>
+    <br>
+     This will start the server and make your API available at "http://localhost:3000". <br>
+     If port 3000 is already in use, you can specify a different port using the "--port" flag, like this:
+     <pre><code>json-server --watch db.json --port 4000</code></pre>
+     <br>
+     <img src="../assets/img/json-server-start.png"
+      alt="Starting the JSON Server in the terminal with the command 'json-server --watch db.json --port 4000'"
+    />
+     To retrieve the list of products defined in the "db.json" file, you can send a GET request to "http://localhost:4000/products".
+  </p>
+
+  <h3>Using fetch to retrieve data from the products endpoint</h3>
+      <p>
+      Below is a simple javascript example using fetch to retrieve data from the products endpoint:
+      </p>
+        <pre><code>
+          async function getProducts() {
+            try {
+              const response = await fetch('http://localhost:4000/products');
+              if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+              }
+              const data = await response.json();
+              console.log('Products:', data);
+            } catch (error) {
+              console.error('Error fetching products:', error);
+            }
+          }
+
+          getProducts();
+        </code></pre>
+          <br>
           <p>
-            When the real service catches up, the transition is smoother because
-            the expected behavior has already been exercised in code, UI states,
-            and test scenarios instead of living only in documentation.
-          </p>
+            When you run this code, it will send a GET request to the "/products" endpoint of your JSON Server, 
+            and you should see the list of products logged in the console. <br>
+
+            <img
+              src="../assets/img/json-server-getProducts.png"
+              alt="Getting products from the JSON Server and logging them in the console"
+            />
+            
+      
+    
+       
         </div>
         <a class="back-link" href="../index.html">Back to all posts</a>
       </article>
