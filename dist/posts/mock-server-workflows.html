@@ -81,46 +81,46 @@
            Having a sandbox that we fully control allows us to focus on the real task at hand, writing solid api layer tests.
            If structured properly, all that would be required to point the test repo to the real backend is updating the baseURL.                      
          </p>
-         <h3>Installation and Configuration</h3>
+         <h3>Setting up JSON Server</h3>
           <p>
             Setting up JSON Server is pretty straightforward. You can install it globally using npm:
             <pre><code>npm install -g json-server</code></pre>
             <br>
             Let's assume we want to create an endpoint called "/products" that returns a list of books. <br>
             To do this, create a file in the root directory called "db.json" and add the following content:
-          </p>
-
+            <div class="code-block">
           <pre><code>
-            {
-              "products": [
-                { 
-                  "id": "978-0-357-83307-0",
-                  "title": "The Adventures of Sherlock Holmes",
-                  "author": "Johann Wolfgang von Goethe",
-                  "genre": "Western",
-                  "department": "books",
-                  "price": 15
-                },
-                {
-                  "id": "978-1-75587-108-4",
-                  "title": "Second Treatise of Government",
-                  "author": "Miguel de Cervantes",
-                  "genre": "Mystery",
-                  "department": "books",
-                  "price": 15
-                },
-                {
-                  "id": "978-1-9821-4567-5",
-                  "title": "Slaughterhouse Five",
-                  "author": "Jacqueline Crooks",
-                  "genre": "Detective",
-                  "department": "books",
-                  "price": 16
-                }
-              ]            
-            }
+    {
+      "products": [
+        { 
+          "id": "978-0-357-83307-0",
+          "title": "The Adventures of Sherlock Holmes",
+          "author": "Johann Wolfgang von Goethe",
+          "genre": "Western",
+          "department": "books",
+          "price": 15
+        },
+        {
+          "id": "978-1-75587-108-4",
+          "title": "Second Treatise of Government",
+          "author": "Miguel de Cervantes",
+          "genre": "Mystery",
+          "department": "books",
+          "price": 15
+        },
+        {
+          "id": "978-1-9821-4567-5",
+          "title": "Slaughterhouse Five",
+          "author": "Jacqueline Crooks",
+          "genre": "Detective",
+          "department": "books",
+          "price": 16
+        }
+      ]            
+    }      
           </code></pre>
-  <br>
+          </div>
+  
   <p>
     Make sure to save the file. Next we can start the server by running the following command in the terminal:
     <pre><code>json-server --watch db.json</code></pre>
@@ -139,22 +139,24 @@
       <p>
       Below is a simple javascript example using fetch to retrieve data from the products endpoint:
       </p>
+      <div class="code-block">
         <pre><code>
-          async function getProducts() {
-            try {
-              const response = await fetch('http://localhost:4000/products');
-              if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-              }
-              const data = await response.json();
-              console.log('Products:', data);
-            } catch (error) {
-              console.error('Error fetching products:', error);
-            }
-          }
+  async function getProducts() {
+    try {
+      const response = await fetch('http://localhost:4000/products');
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const data = await response.json();
+      console.log('Products:', data);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
+  }
 
-          getProducts();
+  getProducts();
         </code></pre>
+      </div>
           <br>
           <p>
             When you run this code, it will send a GET request to the "/products" endpoint of your JSON Server, 
