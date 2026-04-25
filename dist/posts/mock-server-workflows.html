@@ -40,6 +40,36 @@
       type="text/css"
     />
     <link href="../css/styles.css" rel="stylesheet" />
+    <style>
+      .post-content pre,
+      .post-content .code-block {
+        margin: 1rem 0 1.5rem;
+      }
+
+      .post-content .code-block {
+        position: relative;
+      }
+
+      .post-content pre {
+        overflow-x: auto;
+        padding: 1rem 1.25rem;
+        border: 1px solid #d7dee7;
+        border-radius: 12px;
+        background: #f6f8fb;
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+      }
+
+      .post-content pre code {
+        display: block;
+        margin: 0;
+        font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+        font-size: 0.95rem;
+        line-height: 1.65;
+        color: #1f2937;
+        text-align: left;
+        white-space: pre;
+      }
+    </style>
     <script src="../components/header.js"></script>
   </head>
   <body data-base-path="..">
@@ -91,11 +121,11 @@
          <h4>Installation</h4>
           <p>
             Setting up JSON Server is pretty straightforward. You can install it globally using npm:
-            <pre><code>npm install -g json-server</code></pre>
-            <br>
-            
-            
+          </p>
+          <pre><code>npm install -g json-server</code></pre>
+
           <h4>Defining Endpoints and Response Payloads</h4>
+          <p>
             Defining endpoints and response payloads is quite simple. The root directory contains a file called "db.json" 
             which serves as the data source for the API. Here is where you can define the endpoint and response payloads.<br><br>
 
@@ -104,10 +134,10 @@
             scenarios in which data is either missing or incorrect are flagged during testing. As a result, the orders in the example response 
             contain a variety of edge cases, such as missing email, missing item id and incorrect total price.
             <br><br>
-             Save the following JSON object in the "db.json" file:
+            Save the following JSON object in the "db.json" file:
+          </p>
     <div class="code-block">
-      <pre><code>
-{
+      <pre><code>{
   "orders": [
     {
       "id": "cc1a1c02-14ec-44fa-9704-c9dca91d321d",
@@ -164,19 +194,20 @@
       "totalPrice": 18
     }
   ]
-}      
-    </code></pre>
+}</code></pre>
     </div>
   <h4>Starting the server</h4>
   <p>
    Run the following command in the terminal:
-    <pre><code>json-server --watch db.json</code></pre>
-    <br>
+  </p>
+  <pre><code>json-server --watch db.json</code></pre>
+  <p>
      By default, this will start the server on port 3000.
      If this conflicts with another service running on your machine, you can specify a different port using the "--port" flag.
      For Example, to start the server on port 4000, you would run the following command: <br><br>
-     <pre><code>json-server --watch db.json --port 4000</code></pre>
-     <br>
+  </p>
+  <pre><code>json-server --watch db.json --port 4000</code></pre>
+  <p>
      Once the server is running, you should see a message similar to the following in the terminal. 
      This indicates that the server is up and running and ready to accept requests.
      
@@ -207,39 +238,39 @@
     </p>
      
     <div class="code-block">
-        <pre><code>
-  import assert from "assert";
+        <pre><code>import assert from "assert";
 
-  async function checkOrderRecords() {
-    try {
-      // Send GET request to orders endpoint
-      const response = await fetch('http://localhost:4000/orders');
+async function checkOrderRecords() {
+  try {
+    // Send GET request to orders endpoint
+    const response = await fetch("http://localhost:4000/orders");
 
-      // Check if the response is successful
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
+    // Check if the response is successful
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
 
-      // Parse the JSON response and print the total number of orders.
-      const data = await response.json();
-      console.log("\nTotal Orders Retrieved:", data.length);
+    // Parse the JSON response and print the total number of orders.
+    const data = await response.json();
+    console.log("\nTotal Orders Retrieved:", data.length);
 
-      /*  --- Notes ---
-      Ideally, we should perform assertions, however since this is a demo script and we know there are data issues, 
-      I've decided to print tables with the problematic records. I've created a commented block with the assertions
-      as reference which should be used in CI/CD, as we would want the test to fail.
-      */
+    /*  --- Notes ---
+    Ideally, we should perform assertions, however since this is a demo script and we know there are data issues,
+    I've decided to print tables with the problematic records. I've created a commented block with the assertions
+    as reference which should be used in CI/CD, as we would want the test to fail.
+    */
 
-      // Print table with orders that contain an invalid email address. 
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      const invalidEmails = data.filter(order => !emailRegex.test(order?.email));  
-      if (invalidEmails.length > 0) {
-      console.log(`\n--- Error ---\nRecords with Invalid emails: ${invalidEmails.length}\n`)
+    // Print table with orders that contain an invalid email address.
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const invalidEmails = data.filter((order) => !emailRegex.test(order?.email));
+    if (invalidEmails.length > 0) {
+      console.log(`\n--- Error ---\nRecords with Invalid emails: ${invalidEmails.length}\n`);
       console.table(invalidEmails);
-      }
+    }
 
-      // Print table of orders in which the sum of the item price does not equal the totalPrice of the order, along with price discrepency.
-      const sumOfItems = data.map(order => {
+    // Print table of orders in which the sum of the item price does not equal the totalPrice of the order, along with price discrepency.
+    const sumOfItems = data
+      .map((order) => {
         const sum = order.items.reduce((sum, item) => sum + item.price, 0);
         return {
           id: order.id,
@@ -247,34 +278,33 @@
           actualTotalPrice: order.totalPrice,
           priceDiscrepancy: sum - order.totalPrice
         };
-      }).filter(order => order.expectedTotalPrice !== order.actualTotalPrice);
-      if (sumOfItems.length > 0) {
-        console.log(`\n--- ERROR ---\nOrders with Price Discrepancies: ${sumOfItems.length}`);
-        console.table(sumOfItems)
-      }
+      })
+      .filter((order) => order.expectedTotalPrice !== order.actualTotalPrice);
 
-      /*
-      Assertions
-        assert(invalidEmails.length === 0, `\nError: ${invalidEmails.length} order(s) found with invalid or missing email address.`);
-        assert(sumOfItems.length === 0, `\nError: ${sumOfItems.length} order(s) where price sum does not match totalPrice.`);
-      */
-  
-    } catch (error) {
-      console.error('Error fetching orders:', error);
+    if (sumOfItems.length > 0) {
+      console.log(`\n--- ERROR ---\nOrders with Price Discrepancies: ${sumOfItems.length}`);
+      console.table(sumOfItems);
     }
-  }
 
-  checkOrderRecords();
-        </code></pre>
+    /*
+    Assertions
+      assert(invalidEmails.length === 0, `\nError: ${invalidEmails.length} order(s) found with invalid or missing email address.`);
+      assert(sumOfItems.length === 0, `\nError: ${sumOfItems.length} order(s) where price sum does not match totalPrice.`);
+    */
+  } catch (error) {
+    console.error("Error fetching orders:", error);
+  }
+}
+
+checkOrderRecords();</code></pre>
       </div>
-          <br>
           <p>
             In your project, create a new file called "getOrders.js" and copy/paste the code above. 
              Make sure to update the URL in the fetch function if your JSON Server is running on a different port. 
-             Then, run the script using Node.js with the command: <br><br>
-             <pre><code>node getOrders.js</code></pre>
-             <br>
-
+             Then, run the script using Node.js with the command:
+          </p>
+          <pre><code>node getOrders.js</code></pre>
+          <p>
             <img
               src="../assets/img/json-server-getOrders.png"
               alt="Script to find errors in orders response."
