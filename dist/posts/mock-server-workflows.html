@@ -48,15 +48,14 @@
         <div class="post-article-meta">
           <time datetime="2025-03-09">March 9, 2025</time>
           <span class="post-tag">JSON Server</span>
-          <span class="post-tag">Jest</span>
+          <span class="post-tag">Node.js</span>
           <span class="post-tag">API Testing</span>
         </div>
-        <h2>Using JSON-Server + Jest for API Testing</h2>
+        <h2>Developing API tests? Consider using Json-Server</h2>
         <p class="post-lead">
-          I recently spent some time experimenting with JSON Server and Jest as
-          a lightweight way to write API tests without relying on an actual
-          backend service. It’s a great setup for learning,
-          prototyping, and even strengthening API automation fundamentals.
+          JSON-Server is a lightweight tool that allows you to define endpoints and response payloads, providing the ability to
+          develop error scenarios that may be difficult to reproduce in a shared environment. 
+          In this article, I'll walk through how to set up JSON-Server and request data via Node.js. 
         </p>
         <br>
         <div class="post-content">
@@ -65,111 +64,222 @@
             In reality, sometimes this isn't practical for a variety of reasons:
             <ul>
               <li>The test data in the shared environment frequently changes.</li>              
-              <li>The backend is on a different timeline than the frontend work.</li>
-              <li>Rate limits are becoming a problem.</li>
+              <li>The backend is on a different development timeline than the frontend.</li>
+              <li>Existing automation tests are hitting rate limits.</li>
               <li>Reproducing error scenarios involves a complex series of steps.</li>
             </ul>
           </p>
           <p>
-           As an SDET, we have to be flexible and find ways to work around these challenges. <br>
-           In some cases, this means using a mock server, such as "json-server" to create a stable API layer for testing.
+           As an SDET, we have to find ways to unblock ourselves. Sometimes this involves being flexible and exploring alternative solutions.
+           This led me to experiement with "json-server".<br><br>
 
-            Json-server is a great alternative to spinning up a full backend service when the goal is focused on API testing. 
-            It allows us to define custom endpoints and responses using simple JSON files, which can be especially useful for testing specific 
-            scenarios or edge cases that may be difficult to reproduce in a shared environment. <br><br>
+           Json-server is a simple tool that allows you to create a mock REST API using a JSON file as the data source. 
+           It allows for quickly defining custom endpoints and responses, making it the perfect solution for the issue I was facing, considering the alternative
+           was spinning up a full backend service which would have been overkill for the task at hand. <br><br>
+
+           While there are some limitations to be aware of when using json-server, such as the fact that it doesn't support advanced features like 
+           authentication or complex data relationships, it can be a great option for testing specific scenarios or edge cases that may be difficult to 
+           reproduce in a shared environment. <br><br>
 
            Having a sandbox that we fully control allows us to focus on the real task at hand, writing solid api layer tests.
-           If structured properly, all that would be required to point the test repo to the real backend is updating the baseURL.                      
+           If structured properly, all that would be required to point the test suite to the real backend is updating the baseURL.   
+           
+           <br><br>
+           In the next section, I'll walk through how to set up json-server and write some simple tests using Jest to validate the API responses.
          </p>
          <h3>Setting up JSON Server</h3>
+         <h4>Installation</h4>
           <p>
             Setting up JSON Server is pretty straightforward. You can install it globally using npm:
             <pre><code>npm install -g json-server</code></pre>
             <br>
-            Let's assume we want to create an endpoint called "/products" that returns a list of books. <br>
-            To do this, create a file in the root directory called "db.json" and add the following content:
-            <div class="code-block">
-          <pre><code>
+            
+            
+          <h4>Defining Endpoints and Response Payloads</h4>
+            Defining endpoints and response payloads is quite simple. The root directory contains a file called "db.json" 
+            which serves as the data source for the API. Here is where you can define the endpoint and response payloads.<br><br>
+
+            In the example below, I've defined an endpoint called "/orders" that returns a list of purchase orders. <br><br>
+            Each order contains an id, email, list of items, item count and total price. Since these orders are business critical, I want to ensure
+            scenarios in which data is either missing or incorrect are flagged during testing. As a result, the orders in the example response 
+            contain a variety of edge cases, such as missing email, missing item id and incorrect total price.
+            <br><br>
+             Save the following JSON object in the "db.json" file:
+    <div class="code-block">
+      <pre><code>
+{
+  "orders": [
     {
-      "products": [
-        { 
-          "id": "978-0-357-83307-0",
-          "title": "The Adventures of Sherlock Holmes",
-          "author": "Johann Wolfgang von Goethe",
-          "genre": "Western",
-          "department": "books",
-          "price": 15
+      "id": "cc1a1c02-14ec-44fa-9704-c9dca91d321d",
+      "email": "jose@gmail.com",
+      "items": [
+        {
+          "id": "d527bf40-9e9e-489e-9f95-46fb0a40c11f",
+          "department": "music",
+          "price": 17
         },
         {
-          "id": "978-1-75587-108-4",
-          "title": "Second Treatise of Government",
-          "author": "Miguel de Cervantes",
-          "genre": "Mystery",
-          "department": "books",
-          "price": 15
-        },
-        {
-          "id": "978-1-9821-4567-5",
-          "title": "Slaughterhouse Five",
-          "author": "Jacqueline Crooks",
-          "genre": "Detective",
-          "department": "books",
-          "price": 16
+          "id": "2b344e1d-5963-4936-8f54-f667e2fdc6ee",
+          "department": "music",
+          "price": 14
         }
-      ]            
-    }      
-          </code></pre>
-          </div>
-  
+      ],
+      "totalItems": 2,
+      "totalPrice": 28
+    },
+    {
+      "id": "ef023944-6556-41a1-86c1-d192ce7c20cc",
+      "email": "kat87@aol.com",
+      "items": [
+        {
+          "id": null,
+          "department": "music",
+          "price": 22
+        },
+        {
+          "id": "978-0-7536-5990-8",
+          "department": "books",
+          "price": 18
+        },
+        {
+          "id": "978-0-04-813606-0",
+          "department": "books",
+          "price": 17
+        }
+      ],
+      "totalItems": 3,
+      "totalPrice": 57
+    },
+    {
+      "id": "60372ac1-200b-4fa6-b8a2-8898efc1e256",
+      "email": null,
+      "items": [
+        {
+          "id": "21e77f80-2380-4c3e-aaf6-498a33e61bcf",
+          "department": "music",
+          "price": 18
+        }
+      ],
+      "totalItems": 1,
+      "totalPrice": 18
+    }
+  ]
+}      
+    </code></pre>
+    </div>
+  <h4>Starting the server</h4>
   <p>
-    Make sure to save the file. Next we can start the server by running the following command in the terminal:
+   Run the following command in the terminal:
     <pre><code>json-server --watch db.json</code></pre>
     <br>
-     This will start the server and make your API available at "http://localhost:3000". <br>
-     If port 3000 is already in use, you can specify a different port using the "--port" flag, like this:
+     By default, this will start the server on port 3000.
+     If this conflicts with another service running on your machine, you can specify a different port using the "--port" flag.
+     For Example, to start the server on port 4000, you would run the following command: <br><br>
      <pre><code>json-server --watch db.json --port 4000</code></pre>
+     <br>
+     Once the server is running, you should see a message similar to the following in the terminal. 
+     This indicates that the server is up and running and ready to accept requests.
+     
      <br>
      <img src="../assets/img/json-server-start.png"
       alt="Starting the JSON Server in the terminal with the command 'json-server --watch db.json --port 4000'"
     />
-     To retrieve the list of products defined in the "db.json" file, you can send a GET request to "http://localhost:4000/products".
   </p>
-
-  <h3>Using fetch to retrieve data from the products endpoint</h3>
-      <p>
-      Below is a simple javascript example using fetch to retrieve data from the products endpoint:
-      </p>
-      <div class="code-block">
+  <h4>Retrieving data from the mock server</h4>
+   <p>
+    Now that the server is up and running, we can make a get request to the orders endpoint to retreive the response payload.
+    Since I started the server on port 4000, the endpoint I will be sending a request to: 
+    "http://localhost:4000/orders"
+    <br><br>
+    To quickly test this, enter the URL in your web browser.
+    <br>
+    <img
+      src="../assets/img/orders-endpoint-browser.png"
+      alt="Retrieving the orders response by entering the endpoint URL in the browser"
+    /> 
+    
+    
+    <br><br>
+     
+    <h4>Validating the response</h4>           
+    Ideally, I would use a testing framework like Jest to write a proper test suite with assertions, but for demonstration purposes, 
+    I'll create a script that iterates over the Orders response and prints a table with the problematic records. 
+    </p>
+     
+    <div class="code-block">
         <pre><code>
-  async function getProducts() {
+  import assert from "assert";
+
+  async function checkOrderRecords() {
     try {
-      const response = await fetch('http://localhost:4000/products');
+      // Send GET request to orders endpoint
+      const response = await fetch('http://localhost:4000/orders');
+
+      // Check if the response is successful
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
+
+      // Parse the JSON response and print the total number of orders.
       const data = await response.json();
-      console.log('Products:', data);
+      console.log("\nTotal Orders Retrieved:", data.length);
+
+      /*  --- Notes ---
+      Ideally, we should perform assertions, however since this is a demo script and we know there are data issues, 
+      I've decided to print tables with the problematic records. I've created a commented block with the assertions
+      as reference which should be used in CI/CD, as we would want the test to fail.
+      */
+
+      // Print table with orders that contain an invalid email address. 
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const invalidEmails = data.filter(order => !emailRegex.test(order?.email));  
+      if (invalidEmails.length > 0) {
+      console.log(`\n--- Error ---\nRecords with Invalid emails: ${invalidEmails.length}\n`)
+      console.table(invalidEmails);
+      }
+
+      // Print table of orders in which the sum of the item price does not equal the totalPrice of the order, along with price discrepency.
+      const sumOfItems = data.map(order => {
+        const sum = order.items.reduce((sum, item) => sum + item.price, 0);
+        return {
+          id: order.id,
+          expectedTotalPrice: sum,
+          actualTotalPrice: order.totalPrice,
+          priceDiscrepancy: sum - order.totalPrice
+        };
+      }).filter(order => order.expectedTotalPrice !== order.actualTotalPrice);
+      if (sumOfItems.length > 0) {
+        console.log(`\n--- ERROR ---\nOrders with Price Discrepancies: ${sumOfItems.length}`);
+        console.table(sumOfItems)
+      }
+
+      /*
+      Assertions
+        assert(invalidEmails.length === 0, `\nError: ${invalidEmails.length} order(s) found with invalid or missing email address.`);
+        assert(sumOfItems.length === 0, `\nError: ${sumOfItems.length} order(s) where price sum does not match totalPrice.`);
+      */
+  
     } catch (error) {
-      console.error('Error fetching products:', error);
+      console.error('Error fetching orders:', error);
     }
   }
 
-  getProducts();
+  checkOrderRecords();
         </code></pre>
       </div>
           <br>
           <p>
-            When you run this code, it will send a GET request to the "/products" endpoint of your JSON Server, 
-            and you should see the list of products logged in the console. <br>
+            In your project, create a new file called "getOrders.js" and copy/paste the code above. 
+             Make sure to update the URL in the fetch function if your JSON Server is running on a different port. 
+             Then, run the script using Node.js with the command: <br><br>
+             <pre><code>node getOrders.js</code></pre>
+             <br>
 
             <img
-              src="../assets/img/json-server-getProducts.png"
-              alt="Getting products from the JSON Server and logging them in the console"
+              src="../assets/img/json-server-getOrders.png"
+              alt="Script to find errors in orders response."
             />
-            
-      
-    
-       
+          </p>
         </div>
         <a class="back-link" href="../index.html">Back to all posts</a>
       </article>
