@@ -54,7 +54,8 @@
           <span class="post-tag">Qwen2.5-Coder</span>
           <span class="post-tag">Open-WebUI</span>
         </div>
-        <h2>Experimenting with local LLM's</h2>
+        <br>
+        <h3>Experimenting with local LLM's</h3>
 
         <div class="post-content">
           <p>
@@ -87,6 +88,7 @@
             submitting queries about cats via the localhost API.
           </p>
 
+          <hr>
           <h4>Sending a query via the localhost API</h4>
           <p>
             I created a simple script that contains a javascript function to
@@ -118,6 +120,7 @@
             pro's and con's, I decided to move forward with Open WebUI.
           </p>
 
+          <hr>
           <h4>Leveraging Open Web UI</h4>
 
           <p>
@@ -138,6 +141,7 @@
           />
           <br />
 
+          <hr>
           <h4>Conclusion</h4>
           <p>
             I can honestly say I enjoyed the journey. While I have yet to
@@ -165,6 +169,7 @@
             >
           </p>
 
+          <hr>
           <h4>Pulling down Large Language Models (LLM's)</h4>
           <p>
             There are a variety of LLM's available to pull down and run locally
@@ -175,7 +180,13 @@
             with the Llama 3.x model as it's a great general purpose model for
             testing out queries and getting a feel for how local LLM's work.
             Models can be installed using the <i>ollama pull</i> command. For
-            example: <code>ollama pull llama3.2</code> <br /><br />
+            example: 
+            <div class="code-block">
+              <code>ollama pull llama3.2</code> 
+            </div>
+            
+            
+            <br /><br />
             Below is a table of some of the more popular models available.
             <br />
           </p>
@@ -266,12 +277,19 @@
             </tbody>
           </table>
 
+          <hr>
           <h4>Installing Open WebUI</h4>
           <p>
             Open WebUI can be installed using pip:
-            <code>pip install open-webui</code><br />
-            Once installed, you can start the server via the command line with:
-            <code>open-webui serve</code><br />
+            <div class="code-block">
+              <code>pip install open-webui</code><br />
+            </div>
+            
+            Once installed, you can start the server via:
+            <div class="code-block">
+              <code>open-webui serve</code><br />
+            </div>
+            
           </p>
           <img
             src="../assets/img/openWebUI-terminal.png"

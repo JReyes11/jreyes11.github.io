@@ -40,53 +40,28 @@
       type="text/css"
     />
     <link href="../css/styles.css" rel="stylesheet" />
-    <style>
-      .post-content pre,
-      .post-content .code-block {
-        margin: 1rem 0 1.5rem;
-      }
-
-      .post-content .code-block {
-        position: relative;
-      }
-
-      .post-content pre {
-        overflow-x: auto;
-        padding: 1rem 1.25rem;
-        border: 1px solid #d7dee7;
-        border-radius: 12px;
-        background: #f6f8fb;
-        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
-      }
-
-      .post-content pre code {
-        display: block;
-        margin: 0;
-        font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-        font-size: 0.95rem;
-        line-height: 1.65;
-        color: #1f2937;
-        text-align: left;
-        white-space: pre;
-      }
-    </style>
     <script src="../components/header.js"></script>
   </head>
   <body data-base-path="..">
     <main class="content-shell post-page">
       <article class="post-article">
         <div class="post-article-meta">
-          <time datetime="2025-03-09">March 9, 2025</time>
-          <span class="post-tag">JSON Server</span>
-          <span class="post-tag">Node.js</span>
-          <span class="post-tag">API Testing</span>
+            <time datetime="2025-03-09">March 9, 2025</time>              
+              <span class="post-tag">JSON-Server</span>
+              <span class="post-tag">Node.js</span>
+              <span class="post-tag">API Tests</span>
         </div>
-        <h2>Developing API tests? Consider using Json-Server</h2>
+
+        <br>
+        <h3>Developing API tests? Consider using Json-Server</h3>
         <p class="post-lead">
-          JSON-Server is a lightweight tool that allows you to define endpoints and response payloads, providing the ability to
-          develop error scenarios that may be difficult to reproduce in a shared environment. 
+          JSON-Server is a lightweight mock API tool that can be configured to simulate endpoints and response payloads similar 
+          to a test environment, with limitations of course. 
+          
+        <br>
           In this article, I'll walk through how to set up JSON-Server and request data via Node.js. 
         </p>
+        <hr>
         <br>
         <div class="post-content">
           <p>
@@ -117,13 +92,16 @@
            <br><br>
            In the next section, I'll walk through how to set up json-server and write some simple tests using Jest to validate the API responses.
          </p>
-         <h3>Setting up JSON Server</h3>
+         <hr>
          <h4>Installation</h4>
           <p>
             Setting up JSON Server is pretty straightforward. You can install it globally using npm:
           </p>
-          <pre><code>npm install -g json-server</code></pre>
-
+          <div class="code-block">
+            <pre><code>npm install -g json-server</code></pre>
+          </div>
+          <hr>
+    
           <h4>Defining Endpoints and Response Payloads</h4>
           <p>
             Defining endpoints and response payloads is quite simple. The root directory contains a file called "db.json" 
@@ -196,17 +174,24 @@
   ]
 }</code></pre>
     </div>
+  
+  <hr>
   <h4>Starting the server</h4>
   <p>
    Run the following command in the terminal:
   </p>
-  <pre><code>json-server --watch db.json</code></pre>
+  <div class="code-block">
+    <pre><code>json-server --watch db.json</code></pre>
+  </div>
   <p>
      By default, this will start the server on port 3000.
      If this conflicts with another service running on your machine, you can specify a different port using the "--port" flag.
      For Example, to start the server on port 4000, you would run the following command: <br><br>
   </p>
-  <pre><code>json-server --watch db.json --port 4000</code></pre>
+  <div class="code-block">
+    <pre><code>json-server --watch db.json --port 4000</code></pre>
+  </div>
+  
   <p>
      Once the server is running, you should see a message similar to the following in the terminal. 
      This indicates that the server is up and running and ready to accept requests.
@@ -216,6 +201,8 @@
       alt="Starting the JSON Server in the terminal with the command 'json-server --watch db.json --port 4000'"
     />
   </p>
+
+  <hr>
   <h4>Retrieving data from the mock server</h4>
    <p>
     Now that the server is up and running, we can make a get request to the orders endpoint to retreive the response payload.
@@ -229,38 +216,54 @@
       alt="Retrieving the orders response by entering the endpoint URL in the browser"
     /> 
     
+    <br> <br> 
+    Sending a cURL command from the terminal is also an option:
+    <div class="code-block">
+      curl http://localhost:4000/orders | jq
+    </div>
+    <img
+      src="../assets/img/curl-orders.png"
+      alt="cURL command from the terminal."
+    /> 
+    <br>
     
-    <br><br>
-     
+    <hr>
     <h4>Validating the response</h4>           
     Ideally, I would use a testing framework like Jest to write a proper test suite with assertions, but for demonstration purposes, 
     I'll create a script that iterates over the Orders response and prints a table with the problematic records. 
+    <br><br>
+    In your project, create a file called "getOrders.js" and copy/paste the code below. 
+    Make sure to update the URL in the fetch function if your JSON Server is running on a different port. 
     </p>
      
     <div class="code-block">
-        <pre><code>import assert from "assert";
+        <pre><code>
+/* 
+  - Send GET request to orders endpoint. 
+  - Return error if response not successful.
+  - Retrieve json response.
+  - Print the total number of orders returned.
+  - If invalid emails are found or the sum of items does not match the total price, 
+    print tables with the order details.
+  - Ideally, we should perform assertions, however since this is a demo script 
+    and we know there are data issues, I've decided to simply print tables if 
+    problematic records are found. 
+*/
+
+import assert from "assert";
 
 async function checkOrderRecords() {
   try {
-    // Send GET request to orders endpoint
+    
+    /* Make request, return response, print total record count */
     const response = await fetch("http://localhost:4000/orders");
-
-    // Check if the response is successful
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
-
-    // Parse the JSON response and print the total number of orders.
     const data = await response.json();
     console.log("\nTotal Orders Retrieved:", data.length);
 
-    /*  --- Notes ---
-    Ideally, we should perform assertions, however since this is a demo script and we know there are data issues,
-    I've decided to print tables with the problematic records. I've created a commented block with the assertions
-    as reference which should be used in CI/CD, as we would want the test to fail.
-    */
-
-    // Print table with orders that contain an invalid email address.
+    /* Records that contain invalid email address. */
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const invalidEmails = data.filter((order) => !emailRegex.test(order?.email));
     if (invalidEmails.length > 0) {
@@ -268,7 +271,7 @@ async function checkOrderRecords() {
       console.table(invalidEmails);
     }
 
-    // Print table of orders in which the sum of the item price does not equal the totalPrice of the order, along with price discrepency.
+    /* Records where the sum of the item price does not equal the totalPrice */
     const sumOfItems = data
       .map((order) => {
         const sum = order.items.reduce((sum, item) => sum + item.price, 0);
@@ -280,17 +283,16 @@ async function checkOrderRecords() {
         };
       })
       .filter((order) => order.expectedTotalPrice !== order.actualTotalPrice);
-
     if (sumOfItems.length > 0) {
       console.log(`\n--- ERROR ---\nOrders with Price Discrepancies: ${sumOfItems.length}`);
       console.table(sumOfItems);
     }
 
-    /*
-    Assertions
-      assert(invalidEmails.length === 0, `\nError: ${invalidEmails.length} order(s) found with invalid or missing email address.`);
-      assert(sumOfItems.length === 0, `\nError: ${sumOfItems.length} order(s) where price sum does not match totalPrice.`);
+    /* Assertions to be used in CI Pipelines
+    assert(invalidEmails.length === 0, `${invalidEmails.length} order(s) with invalid email address.`);
+    assert(sumOfItems.length === 0, `${sumOfItems.length} order(s) with Item sum & totalPrice mismatch.`);
     */
+
   } catch (error) {
     console.error("Error fetching orders:", error);
   }
@@ -299,12 +301,20 @@ async function checkOrderRecords() {
 checkOrderRecords();</code></pre>
       </div>
           <p>
-            In your project, create a new file called "getOrders.js" and copy/paste the code above. 
-             Make sure to update the URL in the fetch function if your JSON Server is running on a different port. 
-             Then, run the script using Node.js with the command:
+            
+             Run the script in the terminal via:
           </p>
-          <pre><code>node getOrders.js</code></pre>
-          <p>
+          <div class="code-block">
+            <pre><code>node getOrders.js</code></pre>
+          <div>
+        <br>
+       
+        </div>        
+          </div>
+           <p>
+          The following tables are returned, displaying the records in which errors were discovered.
+          <br>
+        </p>
             <img
               src="../assets/img/json-server-getOrders.png"
               alt="Script to find errors in orders response."
