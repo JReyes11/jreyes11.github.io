@@ -59,33 +59,28 @@
 
         <div class="post-content">
           <p>
-            Local LLM's are a great way to experiment with model responses and
-            testing out different prompts without having to worry about latency
-            and cost, not to mention that all of the information remains local
-            on your machine.
+            Setting up Local LLM's is a great way to experiment with various models while keeping your
+            queries and responses private in addition to saving on cost and latency.
           </p>
           <p>
-            When using applications such as ChatGPT, Claude, Gemini, etc, it's
-            advised not to submit queries that contain sensitive information (
-            API Keys, passwords ) as your information is sent out into the world
-            - and may be used to train models. It's comforting to know your LLM
-            setup can be configured to keep all information local. At first I
-            was skeptical, so I turned off my WiFi, submitted a query via the
-            localhost API endpoint and was amazed when a response was returned.
+            When using cloud based applications such as ChatGPT, Claude, Gemini, etc,
+            we have to be careful about the type of information we submit in our queries
+            as the information may be used to train models. Using a local setup ensures
+            your information stays private. Initially I was skeptical about the privacy aspect, 
+            however after turning off my WiFi and submitting a query via the localhost API endpoint,
+            responses continued to be returned.
           </p>
           <p>
-            Don't get me wrong, there are some drawbacks.
-            <br />For example, an LLM running via Ollama have no persistent
-            memory outside of the current session. Once the session is
-            terminated, the history is gone, similar to deleting the local
-            storage in your web browser. In addition, certain models require
-            specific resources (CPU/GPU, RAM) to run locally, so one must be
-            mindful of the hardware requirements when selecting models to run.
-            <br />
-            Since my initial goal was to exclusively submit queries via the
-            localhost API using a general purpose model, this was not a
-            deterrent. I started off using the Llama 3.2 LLM and was having fun
-            submitting queries about cats via the localhost API.
+            From a privacy perspective, hosting a local LLM is a game changer, however from a performance perspective,
+            there are some drawbacks that should be noted.
+            Setting up a local environment requires some upfront costs including time and computing resources.
+            Smaller models can be run on consumer hardware, such as a Mac Mini M4 with 16GB of RAM, however larger
+            models may require machines that have additional CPU/GPU resources. Additionally, response times may take longer 
+            to return when submitting complex queries. 
+            
+           <br />With this in mind, I still wanted to continue this journey as I imagined there would be a great deal of 
+           learnings along the way. In the following sections, I will touch on my interactions with the LLM, followed 
+           by high level Setup and installation instructions.
           </p>
 
           <hr>
