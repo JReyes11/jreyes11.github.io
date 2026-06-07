@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-GLZF9DT8Q5"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-GLZF9DT8Q5");
+    </script>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta
+      name="description"
+      content="Leveraging Google Gemini to create a self-healing layer for Playwright tests."
+    />
+    <meta name="author" content="Jose Reyes" />
+    <title>Self-Healing Test Automation | Jose Reyes</title>
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico" />
+    <script
+      src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Muli:400,400i,700,800"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="../css/styles.css" rel="stylesheet" />
+    <script src="../components/header.js"></script>
+  </head>
+  <body data-base-path="..">
+    <main class="content-shell post-page">
+      <article class="post-article">
+        <div class="post-article-meta">
+          <time datetime="2026-04-02">June 6, 2026</time>
+          <span class="post-tag">Playwright</span>
+          <span class="post-tag">TypeScript</span>
+          <span class="post-tag">Google Gemini</span>
+          <span class="post-tag">AI</span>
+        </div>
+        <br />
+        <h3>Creating a Self-Healing Layer for Playwright Tests</h3>
+
+        <div class="post-content">
+          <p>
+            In a previous post I touched on setting up a local LLM using Ollama
+            and Qwen2.5 and how to interact with the LLM via the localhost API.
+            Down the road this had me thinking about how I could leverage the
+            local LLM or a cloud-based LLM to create a self-healing layer for
+            Playwright tests.
+            <br /><br />
+
+            In this post, I will share the approach I took to integrate Google
+            Gemini into a Playwright setup, along with some of the benefits and
+            challenges I encountered along the way.
+          </p>
+
+          <hr />
+          <h4>Register a Project in Google AI Studio</h4>
+
+          Accessing the Gemini API requires registering a project in Google AI
+          Studio and obtaining an API key. This process involves setting up
+          billing information, creating a new project, and enabling the Gemini
+          API for that project. Once you have your API key, you can use it to
+          authenticate your requests to the Gemini API from your Playwright
+          tests.
+
+          <br />
+          Navigate to:
+          <a href="https://aistudio.google.com/" target="_blank"
+            >https://aistudio.google.com/</a
+          >
+          and follow the instructions on how to create a new project and obtain
+          an API Key.
+
+          <img
+            src="../assets/img/google-ai-studio.png"
+            ,
+            width="800"
+            height="155"
+            alt="Register a project in Google AI Studio"
+          />
+          <hr>
+
+          <h4>Interacting with the Gemini API</h4>
+
+          Since I am primarily interested in using Gemini to resolve page
+          locators that cannot be found, I created a simple helper method that
+          takes the failed locator along with the page dom as parameters and
+          processes them with a well written prompt that is sent to the Gemini API.
+
+          <br /><br />
+
+          <img
+            src="../assets/img/pw-gemini-prompt.png"
+            ,
+            width="700"
+            height="600"
+            alt="Gemini Helper Function"
+          />
+
+          <br /><br />
+          <b>The most challenging part of this process was developing the prompt.</b>
+          Since I am in the experimental phase of the project and am using the Gemini Free Tier, I had to be mindful of token limits while
+          developing a prompt that contained enough context for Gemini to understand the problem and deliver a useful page locator.
+          <br><br>
+          It took a lot of trial and error, but ultimately I decided to move forward with the prompt noted above. I plan on revisiting this
+          again the future in order to develop a more concise prompt that delivers the same results.
+          
+          <hr>
+          <h4>Putting It All Together</h4>
+          With the Gemini helper method in place, I created an automation test spec that registers a user for an account on a ficticious banking website.
+          To test the Gemini integration, I am intentionally attempting to locate the "Register" button using a bad locator in a try/catch block.
+          
+          <br><br>
+          When the test fails to find the Register button, the catch block is executed and the failed locator along with the page dom are sent 
+          to the Gemini helper method.
+          
+          <img
+            src="../assets/img/pw-spec-bad-locator.png"
+            ,
+            width="700"
+            height="500"
+            alt="Gemini Helper Function"
+          />
+
+          <br><br>
+          I wanted to add visibility into the process, so I added print statements to log the suggested locator returned by Gemini.
+          
+          The suggested locator is visibile in the Playwright test runner output.
+          <img
+            src="../assets/img/pw-gemini-suggested-locator.png"
+            ,
+            width="700"
+            height="200"
+            alt="Gemini Helper Function">
+
+          <br><br>
+          The test spec file receives the suggested locator and attempts to locate the Register button, then attempts a click action.
+          <br><br>
+          <b>The End Result</b>
+          The Register button is successfully located and clicked, allowing the test to proceed to the next step which is to assert the welcome message
+          is displayed confirming the user has successfully registered for an account.
+          
+          <img
+            src="../assets/img/pw-self-healing.gif"
+            ,
+            width="1000"
+            height="650"
+            alt="Gemini Helper Function">
+
+
+
+          <hr>
+          <h4>Conclusion</h4>
+        </div>
+
+        <a class="back-link" href="../index.html">Back to all posts</a>
+      </article>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/scripts.js"></script>
+  </body>
+</html>
