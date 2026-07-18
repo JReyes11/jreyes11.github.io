@@ -40,32 +40,46 @@
       type="text/css"
     />
     <link href="css/styles.css" rel="stylesheet" />
+    
     <script src="./components/header.js"></script>
   </head>
   <body data-base-path=".">
-    <main class="content-shell blog-landing">
-      <section class="blog-hero">
-        <p class="page-eyebrow">Hi, I'm Jose</p>
-        <p class="post-sublead">
-          I've worked in the quality space for over 20 years as a Senior Quality
+    <main class="content-shell blog-landing">   
+       <p class="typewriter">
+        <h4>
+
+      
+            Hi, Im Jose. Welcome to my corner of the web where I
+            <span class="typewriter__text"></span>
+            <span class="typewriter__cursor">&nbsp;</span>                        
+            <script src="./components/typewriter.js"></script>  
+            
+            </p>
+              </h4>
+        <div class="post-card-intro">
+             <center><img
+              src="assets/img/profile-photo.png" width="250" height="250"
+              alt="Jose F. Reyes"
+            /> </center>
+        
+        
+          <div class="post-card-copy">            
+           <h2>About Me</h2>
+          
+          I've worked in the Quality Engineering space for over 20 years as a Sr Quality
           Engineer, Software Development Engineer in Test (SDET) and Quality
           Assurance Manager. 
-          
-          In the ever evolving world of Software Development,
-          the complexity of applications and the speed of delivery continue to
-          increase. From a quality perspective, this typically means there is
-          more to test, and less time to test it. <br><br>So how do we keep up? At times
-          the solution is adopting new tools and frameworks. In some cases, it's
-          about finding ways to integrate testing more closely into the
-          development process, whether that's through shift-left testing,
-          continuous integration, or other DevOps practices. <br><br>This blog is where
-          I share practical write-ups on tools, frameworks and process
-          adjustments I've found useful over the years.
-          <hr>
-        </p>
-      </section>
-
-      <!--  -------- Local LLM -->
+          <br><br>
+          Over the years I've worked with a variety of tools, frameworks and technologies. As
+          the development landscape continues to evolve, It is imperative we maintain a growth mindset
+          from a quality perspective and adapt by leveraging new tools and techniques. 
+          <br><br>
+          This is a space where I experiement and share practical write-ups on tools, frameworks and process adjustments.
+       
+          </div>
+        </div>
+        <hr>
+      <!--  -------- Self Healing Tests -->
       <section class="post-stream" aria-label="Latest blog posts">
 
          <article class="post-card">
@@ -81,7 +95,7 @@
           </a>
           <div class="post-card-copy">
             <div class="post-card-meta">
-              <time datetime="2026-04-02">June 6, 2026</time>
+              <time datetime="2026-06-06">June 6, 2026</time>
               <span class="post-tag">Playwright</span>
               <span class="post-tag">TypeScript</span>
               <span class="post-tag">Google Gemini</span>
@@ -93,49 +107,14 @@
               >
             </h2>
             <p class="post-card-subtext">
-              I was intrigued by the idea of a cloud based LLM to create a self-healing leveraging the capabilities of Google Gemini to build a self-healing layer for Playwright tests.
-              In this article, I share the approach I took to integrate Gemini into a Playwright setup, along with some of the benefits and challenges I encountered along the way. 
-              
+              I was intrigued by the idea of leveraging the capabilities of a cloud-based LLM to resolve failures encountered by Playwright tests. 
+              In this article, I share the approach I took to integrate Google Gemini into a Playwright setup, along with some of the benefits and challenges I encountered along the way.
             </p>
             <a class="read-more-link" href="./posts/self-healing.html">Read more</a>
           </div>
         </article>
-        
-        <article class="post-card">
-          <a
-            class="post-card-media"
-            href="./local-llm.html"
-            aria-label="Implementing a Lightweight MCP Client in Node.js"
-          >
-            <img
-              src="assets/img/openWebUI.gif"
-              alt="Local LLM testing workflows with Node.js"
-            />
-          </a>
-          <div class="post-card-copy">
-            <div class="post-card-meta">
-            <time datetime="2026-02-11">Feb 11, 2026</time>
-              <span class="post-tag">AI</span>
-               <span class="post-tag">LLM</span>
-              <span class="post-tag">Ollama</span>
-              <span class="post-tag">Open WebUI</span>
-             
-            </div>
-            <h2>
-              <a href="./posts/local-llm.html"
-                >Experimenting with local LLM's</a
-              >
-            </h2>
-            <p class="post-card-subtext">
-              A few weeks ago I set up a local LLM environment using Ollama, Qwen2.5-Coder and Open WebUI...
-            </p>
-            <a class="read-more-link" href="./posts/local-llm.html">Read more</a>
-          </div>
-            
-          </div>
-        </article>
 
-        <!-- Mock Server -->
+        <!-- JSON Server -->
         <article class="post-card">
           <a
             class="post-card-media"
@@ -170,72 +149,38 @@
           </div>
         </article>
 
-        <!-- MCP Client -->
+            <!--  -------- Local LLM -->
         <article class="post-card">
           <a
             class="post-card-media"
-            href="./posts/mcp-client-nodejs.html"
+            href="./local-llm.html"
             aria-label="Implementing a Lightweight MCP Client in Node.js"
           >
             <img
-              src="assets/img/mcp-nodejs.gif"
-              alt="Animated preview of connecting to an MCP server with Node.js"
+              src="assets/img/openWebUI.gif"
+              alt="Local LLM testing workflows with Node.js"
             />
           </a>
           <div class="post-card-copy">
             <div class="post-card-meta">
-                <time datetime="2026-04-05">April 5, 2026</time>
-              <span class="post-tag">MCP</span>
-              <span class="post-tag">Node.js</span>              
+            <time datetime="2026-02-11">Feb 11, 2026</time>
+              <span class="post-tag">AI</span>
+               <span class="post-tag">LLM</span>
+              <span class="post-tag">Ollama</span>
+              <span class="post-tag">Open WebUI</span>
+             
             </div>
             <h2>
-              <a href="./posts/mcp-client-nodejs.html"
-                >Implementing a Lightweight MCP Client in Node.js</a
+              <a href="./posts/local-llm.html"
+                >Experimenting with local LLM's</a
               >
             </h2>
             <p class="post-card-subtext">
-              Recently I was tasked with testing the functionality of a Model Context Protocol (MCP) server. 
-              The short term goal: Ensure a valid response is returned when submitting a query. 
-              The long term goal: Build a lightweight client that could be used for validation in CI/CD.
+              A few weeks ago I set up a local LLM environment using Ollama, Qwen2.5-Coder and Open WebUI...
             </p>
-            <a class="read-more-link" href="./posts/mcp-client-nodejs.html">Read more</a>
+            <a class="read-more-link" href="./posts/local-llm.html">Read more</a>
           </div>
-          </div>
-        </article>
-
-
-        <!--  -->
-       
-
-        <article class="post-card">
-          <a
-            class="post-card-media"
-            href="./posts/api-testing-with-jest.html"
-            aria-label="Read more about API testing with Jest"
-          >
-            <img
-              src="assets/img/jest-yarn.gif"
-              alt="Animated preview of API testing workflows with Jest and Yarn"
-            />
-          </a>
-          <div class="post-card-copy">
-            <div class="post-card-meta">
-              <span class="post-tag">NodeJS</span>
-              <time datetime="2026-03-18">March 18, 2026</time>
-            </div>
-            <h2>
-              <a href="./posts/api-testing-with-jest.html"
-                >API testing with Jest and Node.js without the brittle setup</a
-              >
-            </h2>
-            <p class="post-card-subtext">
-              A simple pattern for validating response contracts, organizing
-              fixtures, and keeping your API test layer fast enough to run
-              constantly during feature work.
-            </p>
-            <a class="read-more-link" href="./posts/api-testing-with-jest.html"
-              >Read more</a
-            >
+            
           </div>
         </article>
 
