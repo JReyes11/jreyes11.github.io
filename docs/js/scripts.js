@@ -1,6 +1,6 @@
 /*!
 * Start Bootstrap - Resume v1.0.0 (https://jreyes11.github.io)
-* Copyright 2013-2025 undefined
+* Copyright 2013-2026 undefined
 * Licensed under MIT (https://github.com/StartBootstrap/online-resume/blob/master/LICENSE)
 */
 //
@@ -25,10 +25,30 @@ window.addEventListener('DOMContentLoaded', event => {
     );
     responsiveNavItems.map(function (responsiveNavItem) {
         responsiveNavItem.addEventListener('click', () => {
-            if (window.getComputedStyle(navbarToggler).display !== 'none') {
+            if (navbarToggler && window.getComputedStyle(navbarToggler).display !== 'none') {
                 navbarToggler.click();
             }
         });
+    });
+
+    document.addEventListener('click', (clickEvent) => {
+        const link = clickEvent.target.closest('a[href]');
+        if (!link) {
+            return;
+        }
+
+        const url = new URL(link.href, window.location.href);
+        const isSamePageHash = url.pathname === window.location.pathname && url.hash;
+        const isExternal = url.origin !== window.location.origin;
+        const shouldSkip =
+            link.target === '_blank' ||
+            link.hasAttribute('download') ||
+            isExternal ||
+            isSamePageHash;
+
+        if (!shouldSkip) {
+            document.documentElement.classList.add('is-leaving');
+        }
     });
 
 });

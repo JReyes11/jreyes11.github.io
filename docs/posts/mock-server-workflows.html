@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-GLZF9DT8Q5"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-GLZF9DT8Q5");
+    </script>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta
+      name="description"
+      content="An article from Jose Reyes about using mock servers to support faster delivery."
+    />
+    <meta name="author" content="Jose Reyes" />
+    <title>Mock Server Workflows | Jose Reyes</title>
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico" />
+    <script
+      src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Muli:400,400i,700,800"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="../css/styles.css" rel="stylesheet" />
+    <script src="../components/header.js"></script>
+  </head>
+  <body data-base-path="..">
+    <main class="content-shell post-page">
+      <article class="post-article">
+        <div class="post-article-meta">
+            <time datetime="2025-03-09">March 9, 2025</time>              
+              <span class="post-tag">JSON-Server</span>
+              <span class="post-tag">Node.js</span>
+              <span class="post-tag">API Tests</span>
+        </div>
+
+        <br>
+        <h3>Developing API tests? Consider using Json-Server</h3>
+        <p class="post-lead"></p>
+        <hr>
+       
+        <div class="post-content">
+          <p>
+            Over the past 20 years, I cannot recall how many times I was in the middle of writing API tests or helper scripts
+            when suddenly the backend service went offline either due to an issue or maintenance. Earlier in my career, this
+            would result in a major roadblock as I would have to stop what I was working on and wait for the backend to be restored.            
+            After several incidents like this, I was determined to find a solution that would allow me to continue working. 
+            This is when I discovered "JSON-Server".
+            <br /><br />
+
+            JSON-Server is a light weight application that can run locally and be configured to return custom responses mirroring
+            the real backend. Having this setup as a backup plan has been a game changer, allowing me to continue writing tests and 
+            delivering on time.
+            <br /><br />
+            
+            I quickly discovered this could also be leveraged to easily test edge cases and error scenarios since I have the 
+            ability to configure the response payloads. This helped strengthen the test suites and catch bugs that may occur intermittently.
+           In the next section, I'll walk through how to set up json-server and write some simple tests using Jest to validate the API responses.
+         </p>
+         <hr>
+         <h4>Installation</h4>
+          <p>
+            Setting up JSON Server is pretty straightforward. You can install it globally using npm:
+          </p>
+          <div class="code-block">
+            <pre><code>npm install -g json-server</code></pre>
+          </div>
+          <hr>
+    
+          <h4>Defining Endpoints and Response Payloads</h4>
+          <p>
+            The simplicity of JSON Server is one of its greatest strengths. Endpoints and response payloads can be quickly defined
+            in the repo's "db.json" file, which serves as the data source for the API. Ideally, the response payloads should mirror 
+            the real backend, allowing you to easily test edge cases and error scenarios.
+            <br><br>
+
+            Multiple endpoints and response payloads can be defined in the "db.json" file, but for demonstration purposes, 
+            I'll define a single endpoint ("Orders") which returns the response payload shown below.
+            <br><br>
+        
+          </p>
+           <div class="alert alert-success" role="alert">
+    <div class="code-block">
+      <pre><code>{
+  "orders": [
+    {
+      "id": "cc1a1c02-14ec-44fa-9704-c9dca91d321d",
+      "email": "jose@gmail.com",
+      "items": [
+        {
+          "id": "d527bf40-9e9e-489e-9f95-46fb0a40c11f",
+          "department": "music",
+          "price": 17
+        },
+        {
+          "id": "2b344e1d-5963-4936-8f54-f667e2fdc6ee",
+          "department": "music",
+          "price": 14
+        }
+      ],
+      "totalItems": 2,
+      "totalPrice": 28
+    },
+    {
+      "id": "ef023944-6556-41a1-86c1-d192ce7c20cc",
+      "email": "kat87@aol.com",
+      "items": [
+        {
+          "id": null,
+          "department": "music",
+          "price": 22
+        },
+        {
+          "id": "978-0-7536-5990-8",
+          "department": "books",
+          "price": 18
+        },
+        {
+          "id": "978-0-04-813606-0",
+          "department": "books",
+          "price": 17
+        }
+      ],
+      "totalItems": 3,
+      "totalPrice": 57
+    },
+    {
+      "id": "60372ac1-200b-4fa6-b8a2-8898efc1e256",
+      "email": null,
+      "items": [
+        {
+          "id": "21e77f80-2380-4c3e-aaf6-498a33e61bcf",
+          "department": "music",
+          "price": 18
+        }
+      ],
+      "totalItems": 1,
+      "totalPrice": 18
+    }
+  ]
+}</code></pre>
+    </div></div>
+  
+  <hr>
+  <h4>Starting the server</h4>
+  <p>
+   Run the following command in the terminal:
+  </p>
+  <div class="code-block">
+    <pre><code>npx json-server</code></pre>
+  </div>
+  <p>
+     By default, this will start the server on port 3000.
+     If this conflicts with another service running on your machine, use the "--port" flag to specify a different port.
+     For Example, to start the server and use port 4000: <br><br>
+  </p>
+  <div class="code-block">
+    <pre><code>npx json-server --port 4000</code></pre>
+  </div>
+  
+  <p>
+     Once the server is running, you should see a message similar to the following in the terminal. 
+     This indicates that the server is up and running and ready to accept requests. In this screenshot, the terminal indicates there are a total 
+     of 3 endpoints defined in the "db.json" file (orders, users, products).
+     
+     <br>
+     <img src="../assets/img/json-server-start.png"
+      alt="Starting the JSON Server in the terminal with the command 'json-server --watch db.json --port 4000'"
+    />
+  </p>
+
+  <hr>
+  <h4>Retrieving data from the mock server</h4>
+   <p>
+    Now that the server is up and running, we can make a GET request to the "orders" endpoint to retrieve the response payload.
+    Since I started the server on port 4000, the endpoint I will be sending a request to: 
+    "http://localhost:4000/orders"
+    <br><br>
+    
+    To quickly ensure the orders endpoint is returning the expected response payload, try the following: 
+    <br> <br>
+
+    <b>Paste the endpoint URL in a Web browser</b>
+    <div class="code-block">
+    <img
+      src="../assets/img/orders-endpoint-browser.png"
+      alt="Retrieving the orders response by entering the endpoint URL in the browser"
+    /> 
+    </div>
+
+    <br> <br> 
+     <b>Run a cURL Command in the terminal</b>
+    <div class="code-block">
+      curl http://localhost:4000/orders | jq
+    </div>
+    <img
+      src="../assets/img/curl-orders.png"
+      alt="cURL command from the terminal."
+    /> 
+    <br>
+    
+    <hr>
+    <h4>Validating the response</h4>           
+    Ideally, I would use a testing framework like Jest to write a proper test suite with assertions, but for demonstration purposes, 
+    I'll create a script that iterates over the Orders response and prints a table with the problematic records. 
+    <br><br>
+    In your project, create a file called "getOrders.js" and copy/paste the code below. 
+    Make sure to update the URL in the fetch function if your JSON Server is running on a different port. 
+    </p>
+     
+    <div class="alert alert-success" role="alert">
+    <div class="code-block">
+        <pre><code>
+/* 
+  - Send GET request to orders endpoint. 
+  - Return error if response not successful.
+  - Retrieve json response.
+  - Print the total number of orders returned.
+  - If invalid emails are found or the sum of items does not match the total price, 
+    print tables with the order details.
+  - Ideally, we should perform assertions, however since this is a demo script 
+    and we know there are data issues, I've decided to simply print tables if 
+    problematic records are found. 
+*/
+
+import assert from "assert";
+
+async function checkOrderRecords() {
+  try {
+    
+    /* Make request, return response, print total record count */
+    const response = await fetch("http://localhost:4000/orders");
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log("\nTotal Orders Retrieved:", data.length);
+
+    /* Records that contain invalid email address. */
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const invalidEmails = data.filter((order) => !emailRegex.test(order?.email));
+    if (invalidEmails.length > 0) {
+      console.log(`\n--- Error ---\nRecords with Invalid emails: ${invalidEmails.length}\n`);
+      console.table(invalidEmails);
+    }
+
+    /* Records where the sum of the item price does not equal the totalPrice */
+    const sumOfItems = data
+      .map((order) => {
+        const sum = order.items.reduce((sum, item) => sum + item.price, 0);
+        return {
+          id: order.id,
+          expectedTotalPrice: sum,
+          actualTotalPrice: order.totalPrice,
+          priceDiscrepancy: sum - order.totalPrice
+        };
+      })
+      .filter((order) => order.expectedTotalPrice !== order.actualTotalPrice);
+    if (sumOfItems.length > 0) {
+      console.log(`\n--- ERROR ---\nOrders with Price Discrepancies: ${sumOfItems.length}`);
+      console.table(sumOfItems);
+    }
+
+    /* Assertions to be used in CI Pipelines
+    assert(invalidEmails.length === 0, `${invalidEmails.length} order(s) with invalid email address.`);
+    assert(sumOfItems.length === 0, `${sumOfItems.length} order(s) with Item sum & totalPrice mismatch.`);
+    */
+
+  } catch (error) {
+    console.error("Error fetching orders:", error);
+  }
+}
+
+checkOrderRecords();</code></pre>
+      </div></div>
+          <p>
+            
+             Run the script in the terminal via:
+          </p>
+          <div class="code-block">
+            <pre><code>node getOrders.js</code></pre>
+          <div>
+        <br>
+       
+        </div>        
+          </div>
+           <p>
+          The following tables are returned, displaying the records in which errors were discovered.
+          <br>
+        </p>
+            <img
+              src="../assets/img/json-server-getOrders.png"
+              alt="Script to find errors in orders response."
+            />
+          </p>
+        </div>
+        <hr>
+        <h3>Conclusion</h3>     
+        <p>
+          JSON Server is a great tool to have in your toolbox when developing API tests. 
+          It allows you to quickly set up a mock server that can return custom responses, 
+          making it easier to test edge cases and error scenarios. 
+          By having this setup as a backup plan, you can continue writing tests and delivering on time even 
+          when the real backend is down.
+
+          <br><br>
+        <a class="back-link" href="../index.html">Back to all posts</a>
+      </article>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/scripts.js"></script>
+  </body>
+</html>

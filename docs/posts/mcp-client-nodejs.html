@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-GLZF9DT8Q5"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-GLZF9DT8Q5");
+    </script>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta
+      name="description"
+      content="Connecting to an MCP server with Node.js"
+    />
+    <meta name="author" content="Jose Reyes" />
+    <title>Connecting to an MCP server with Node.js | Jose Reyes</title>
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico" />
+    <script
+      src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Muli:400,400i,700,800"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="../css/styles.css" rel="stylesheet" />
+    <script src="../components/header.js"></script>
+  </head>
+  <body data-base-path="..">
+    <main class="content-shell post-page">
+      <article class="post-article">
+        <div class="post-article-meta">
+          <time datetime="2026-04-05">April 5, 2026</time>
+          <span class="post-tag">AI</span>
+          <span class="post-tag">MCP Client</span>
+          <span class="post-tag">MCP Server</span>
+          <span class="post-tag">Node.js</span>         
+        </div>
+        <h2>Testing MCP Server Connectivity with Node.js</h2>
+        <p class="post-lead">
+          Learn how to connect to an MCP server using Node.js and make API requests.
+        </p>
+        <figure class="post-feature">
+          <img
+            src="../assets/img/mcp-nodejs.gif"
+            alt="Animated preview of connecting to an MCP server with Node.js"
+          />
+        </figure>
+        <div class="post-content">
+          <p>
+            My default pattern is to keep the transport layer simple and move
+            most of the structure into readable helpers. Request builders,
+            schema checks, and small fixture sets make it easier to express what
+            a test is proving instead of scattering assertions across every
+            file.
+          </p>
+          <p>
+           Recently I was presented with the task of testing an MCP server to ensure it was responding to requests as expected. 
+           After doing a bit of research, I installed the "MCP Inspector" tool on my local machine for experiementation. 
+           This tool provides a user-friendly interface for sending requests to the MCP server and viewing the responses, 
+           which made it easier for me to understand how the server was functioning and identify any issues that needed to be addressed.
+
+           I found that using Node.js and the built-in `http` module provided a straightforward way to connect to the MCP server and make API requests. 
+           By creating a simple client that could send requests and handle responses, I was able to quickly verify the server's functionality 
+           and identify any issues that needed to be addressed.
+          </p>
+          <p>
+            I also like to separate validation failures into two buckets:
+            response-shape problems and business-rule problems. That keeps test
+            intent sharp and helps teams understand whether they’re looking at a
+            broken contract or a broken behavior.
+          </p>
+          <p>
+            Once the suite is easy to trust locally, it becomes much easier to
+            plug into CI as a reliable checkpoint instead of an occasional,
+            flaky job that everyone reruns by instinct.
+          </p>
+        </div>
+        <a class="back-link" href="../index.html">Back to all posts</a>
+      </article>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/scripts.js"></script>
+  </body>
+</html>

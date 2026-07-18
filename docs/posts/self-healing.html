@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-GLZF9DT8Q5"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-GLZF9DT8Q5");
+    </script>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta
+      name="description"
+      content="Leveraging Google Gemini to create a self-healing layer for Playwright tests."
+    />
+    <meta name="author" content="Jose Reyes" />
+    <title>Self-Healing Test Automation | Jose Reyes</title>
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico" />
+    <script
+      src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Muli:400,400i,700,800"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="../css/styles.css" rel="stylesheet" />
+    <script src="../components/header.js"></script>
+  </head>
+  <body data-base-path="..">
+    <main class="content-shell post-page">
+      <article class="post-article">
+        <div class="post-article-meta">
+          <time datetime="2026-06-06">June 6, 2026</time>
+          <span class="post-tag">Playwright</span>
+          <span class="post-tag">TypeScript</span>
+          <span class="post-tag">Google Gemini</span>
+          <span class="post-tag">AI</span>
+        </div>
+        <br />
+        <h3>Self Healing Automation tests using Google Gemini</h3>
+
+        <div class="post-content">
+          <p>
+            Let me set the scene. It's a Thursday afternoon. The UI team pushed
+            changes overnight, and now a third of my Playwright tests are
+            screaming about locators that no longer exist. The element is still
+            on the page. I can see it with my own eyes. But the selector I wrote
+            three weeks ago? Gone. Irrelevant. A relic of a simpler time. This
+            is the locator problem — and if you've spent any time in test
+            automation, you know it intimately. Selectors break. Frequently.
+            Quietly. Sometimes right before a release demo, if the universe is
+            feeling particularly creative. 
+            <br /><br />
+            So I did what any reasonable engineer
+            does when confronted with a maintenance spiral: I asked an AI to
+            handle it.
+
+            <br /><br />
+
+            After a bit of research, I discovered Gemini — Google's powerful
+            large language model (LLM) has a free tier that offers a robust API.
+            So with nothing much to lose and everything to gain, I embarked on the following journey.
+          </p>
+
+          <hr />
+          <h4>Interacting with the Gemini API</h4>
+
+            <div class="alert alert-info" role="alert">
+            <b>Note:</b> To obtain an API Key, you'll need to create an account and register a product in  <a href="https://aistudio.google.com/" target="_blank" style="white-space: nowrap;">Google AI Studio</a>.
+          <br>
+          Google offers a free tier for the Gemini API, which includes a certain number of free tokens each month which is ideal for experiementation purposes.
+          </div>
+
+          Since I am primarily interested in using Gemini to resolve page
+          locators that cannot be found, I created a simple helper method that
+          accepts the failed locator and page dom as parameters which are passed to the API along with the prompt displayed below.                              
+
+          <br /><br />
+
+          <img
+            src="../assets/img/pw-gemini-prompt.png"
+            ,
+            width="700"
+            height="600"
+            alt="Gemini Helper Function"
+          />
+
+        
+          <b
+            >The most challenging part of this process was developing the
+            prompt.</b
+          >
+          Since I am in the experimental phase of the project and am using the
+          Gemini Free Tier, I had to be mindful of token limits while developing
+          a prompt that contained enough context for Gemini to understand the
+          problem and deliver a useful page locator.
+          <br /><br />
+          It took a lot of trial and error, but ultimately I decided to move
+          forward with the prompt noted above. I plan on revisiting this again
+          the future in order to develop a more concise prompt that delivers the
+          same results.
+
+          <hr />
+          <h4>Adjusting the test spec</h4>
+          With the Gemini helper method in place, I created an automation test
+          spec that registers a user for an account on a ficticious banking
+          website. To test the Gemini integration, I am intentionally attempting
+          to locate the "Register" button using a bad locator in a try/catch
+          block.
+
+          <br /><br />
+          When the test fails to find the Register button, the catch block is
+          executed and the failed locator along with the page dom are sent to
+          the Gemini helper method.
+
+          <img
+            src="../assets/img/pw-spec-bad-locator.png"
+            ,
+            width="700"
+            height="500"
+            alt="Gemini Helper Function"
+          />
+
+          <br />
+          I wanted to add visibility into the process, so I added print
+          statements to log the suggested locator returned by Gemini. 
+          <br>The suggested locator is visibile in the Playwright test runner output.
+          <img
+            src="../assets/img/pw-gemini-suggested-locator.png"
+            ,
+            width="700"
+            height="200"
+            alt="Gemini Helper Function"
+          />
+
+          <br />
+          Gemini returns the suggested locator ( role=button[name="Register"] ) to the test spec, which then attempts to locate the element and perform a click action. 
+          
+          
+          <hr />
+          <h4>Putting it All Together</h4>
+          The Register button is successfully located and clicked, allowing the
+          test to proceed to the next step which is to assert the welcome
+          message is displayed confirming the user has successfully registered
+          for an account.
+
+          <img
+            src="../assets/img/pw-self-healing.gif"
+            ,
+            width="1000"
+            height="650"
+            alt="Gemini Helper Function"
+          />
+
+          <hr />
+          <h4>Conclusion</h4>
+          The integration of Google Gemini into a Playwright test suite to create a self-healing layer for locators is an exciting development in the world of test automation.
+          While there are still challenges to overcome, such as optimizing the prompt and managing token limits, the potential benefits of this approach are significant. 
+          By leveraging the power of LLMs, we can reduce the maintenance burden of test automation and create more resilient test suites that can adapt to changes in the application under test.
+        </div>
+
+        <a class="back-link" href="../index.html">Back to all posts</a>
+      </article>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/scripts.js"></script>
+  </body>
+</html>

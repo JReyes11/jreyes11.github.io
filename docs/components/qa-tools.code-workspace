@@ -1,0 +1,32 @@
+{
+	"folders": [
+		{
+			"path": "../../../../Desktop/Desktop_Folders/Automation/qa-tools"
+		},
+		{
+			"path": "../../../../../../Volumes/Jose_2T/document-analyzer"
+		},
+		{
+			"path": "../../../../../../Volumes/Jose_2T/Jose_Dev/playwright_js"
+		},
+		{
+			"path": "../../../../Desktop/Desktop_Folders/Automation/chrome_ext_barcodes"
+		},
+		{
+			"path": "../../../../../../Volumes/Jose_2T/Jose_Dev/WeatherApp"
+		},
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../mock-server"
+		},
+		{
+			"path": "../../../Jest-API-Tests"
+		},
+		{
+			"path": "../../../../../../Volumes/Jose_2T/Jose_Dev/playwright_ts_gemini"
+		}
+	],
+	"settings": {}
+}
