@@ -345,6 +345,11 @@ svg {
   vertical-align: middle;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 table {
   caption-side: bottom;
   border-collapse: collapse;
@@ -11723,7 +11728,7 @@ body::before {
 
 .post-card-intro {
   display: grid;
-  grid-template-columns: minmax(25rem, 15rem) minmax(0, 1fr);
+  grid-template-columns: minmax(15rem, 20rem) minmax(0, 1fr);
   gap: 1.75rem;
   padding: 1.15rem;
   border: 1px solid var(--line);
@@ -11860,6 +11865,35 @@ body::before {
   display: grid;
   gap: 1.2rem;
   margin-bottom: 2.2rem;
+  min-width: 0;
+}
+
+.post-content > * {
+  min-width: 0;
+}
+
+.post-content table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.code-block {
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background: #202a33;
+  color: #f8f9fa;
+}
+
+.code-block pre {
+  margin: 0;
+}
+
+.code-block code {
+  color: inherit;
 }
 
 .site-footer {
@@ -11918,6 +11952,10 @@ html.is-leaving #topNavbar {
     grid-template-columns: 1fr;
   }
 
+  .post-card-intro {
+    grid-template-columns: 1fr;
+  }
+
   .post-card-copy {
     padding-right: 0;
   }
@@ -11946,6 +11984,18 @@ html.is-leaving #topNavbar {
 }
 
 @media (max-width: 575.98px) {
+  .toolbar-shell,
+  .content-shell,
+  .footer-shell {
+    width: min(100% - 1.25rem, 75rem);
+  }
+
+  .content-shell,
+  .post-page {
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+  }
+
   .toolbar-brand-group {
     gap: 0.8rem;
   }
@@ -11973,7 +12023,33 @@ html.is-leaving #topNavbar {
     border-radius: 1.4rem;
   }
 
+  .post-card-intro {
+    gap: 1rem;
+    padding: 0.9rem;
+    border-radius: 1.4rem;
+  }
+
+  .post-card-copy {
+    gap: 0.8rem;
+  }
+
+  .post-tag {
+    padding: 0.28rem 0.62rem;
+    font-size: 0.72rem;
+  }
+
+  .post-card-subtext,
+  .post-content p {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .code-block {
+    padding: 0.75rem;
+    border-radius: 0.6rem;
+  }
+
   .post-card-media img {
     min-height: 13rem;
   }
-} 
+}
