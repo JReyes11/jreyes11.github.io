@@ -11308,6 +11308,7 @@ p.lead {
 .toolbar-title-block {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   justify-content: center;
   gap: 0.15rem;
   line-height: 1;
@@ -11589,6 +11590,7 @@ body::before {
 .toolbar-title-block {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   justify-content: center;
   gap: 0.15rem;
   line-height: 1;
