@@ -1,10 +1,7 @@
 const el = document.querySelector(".typewriter__text");
 
 const lines = [
-  "share my passion for writing automation tests.",
-   "document my experiments with various AI LLM's.",
-   "try something new every few weeks and share my learnings.",
-   "ponder the meaning of life and the universe.",
+  "",
 ];
 
 let lineIndex = 0;
