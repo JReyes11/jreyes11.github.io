@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-GLZF9DT8Q5"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-GLZF9DT8Q5");
+    </script>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta
+      name="description"
+      content="Leveraging GenerativeAI to generate comprehensive test cases for software applications."
+    />
+    <meta name="author" content="Jose Reyes" />
+    <title>Generative AI Test Case Generation | Jose Reyes</title>
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico" />
+    <script
+      src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Muli:400,400i,700,800"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="../css/styles.css" rel="stylesheet" />
+    <script src="../components/header.js"></script>
+  </head>
+  <body data-base-path="..">
+    <main class="content-shell post-page">
+      <article class="post-article">
+        <div class="post-article-meta">
+          <time datetime="2026-07-25">July 25, 2026</time>
+          <span class="post-tag">Generative AI</span>
+          <span class="post-tag">Google Gemini</span>
+          <span class="post-tag">Test Cases</span>
+          <span class="post-tag">Github</span>
+        </div>
+        <br />
+        <h3>Leveraging an LLM to generate comprehensive test cases from Github diffs</h3>
+
+        <div class="post-content">
+          <p>
+            Picture this - A ticket has been marked as Ready for testing on the sprint board, and as a Quality Engineer, 
+            you open the corresponding merge request to gain a better understanding of the changes before you begin testing.
+            The merge request contains many modifications, but your focus is on validating only the changes introduced for this 
+            specific ticket, not to mention you have a number of other tickets that require your attention as well.
+            
+            <br /><br />
+            This calls for us to work smarter, not harder. By retrieving the diff between the merge request and the main branch, 
+            we can provide that context to a large language model (LLM) and prompt it to generate detailed, targeted test cases 
+            with expected results based solely on the changes included in the merge request.
+            
+            <br /><br />
+            This is my thought process for generating test cases using an LLM of choice and the Git diff of a merge request.
+            <br><br>
+            
+            <img
+              src="../assets/img/Git-diff-llm-test-cases.png"
+              alt="Workflow diagram showing how to generate test cases using a large language model (LLM) and a Git diff"
+            />
+
+          </p>
+
+          <hr />
+         
+     
+          <h4>An End-to-End Example</h4>
+         
+
+          For demonstration purposes, I chose a random (public) project in Github that has merge requests with numerous changes.
+          Since this is a public project, there is no need for authentication to retrieve the diff of a merge request. 
+          However, if I were working with a private repository, I would need to obtain an API key with the proper scopes to authenticate 
+          when making API requests to the Github API.
+
+          
+          <br> <br>
+          Since I have previously used GeminiAI to resolve flaky locators in Playwright, I decided to leverage it for this example.
+          Below is a script (JavaScript) that retrieves the diff of a merge request from Github and prompts GeminiAI to generate 
+          test cases based on the changes in the diff.
+           <br><br>
+            
+            <img
+              src="../assets/img/github-gemini-script.png"
+              alt="Workflow diagram showing how to generate test cases using a large language model (LLM) and a Git diff"
+            />
+
+          Executing the script prompts for the PullID of the merge request and a prompt. 
+          The test cases are then displayed in the terminal.
+          <br><br>
+          <img
+              src="../assets/img/github-gemini-2.gif"
+              alt="Animated preview of GeminiAI generating test cases"
+              width="900",
+              height="600"
+
+            />
+          <hr>
+          <h4>Viewing Test Cases in the terminal is... ehhh</h4>
+          Why suffer if we dont have to, right? 
+
+          <br><br>
+          Technically all we need is the diff from Github, which we could then upload to the Gemini UI Interface.
+          This will provide a much better experience for reviewing the generated test cases.
+
+          <br><br>
+          Let's modify the script to simply retreive the diff from Github and save it to a local file, which we can then upload 
+          to the Gemini UI Interface.
+
+           <img
+              src="../assets/img/github-script-modified.png"
+              alt="Screenshot of script saving diff to local file."
+              width="900",
+              height="600"
+
+            />
+          <br><br>
+          Once executed, the script will save the diff response locally. Now we can drag/drop the file into the Gemini UI Interface 
+          and generate test cases based on the diff.
+
+          <br><br>
+          <img
+              src="../assets/img/Gemini-UI-Test-Cases3.gif"
+              alt="Screenshot of GeminiAI UI showing generated test cases"
+              width="900",
+              height="600"
+
+            />
+          <br><br>
+
+          <h4>Conclusion</h4>
+          In conclusion, leveraging the Github API and an LLM such as Gemini to generate test cases based on the diff of a merge request can significantly improve
+          the efficiency and effectiveness of the testing process. This also makes it easy to copy/paste the test cases into the comments sectionof the ticket
+          you are testing. 
+          <br><br>
+          Thinking long term, you can also prompt the LM to save the test cases in a specific format, such as JSON, which can then be used to automate the creation of 
+          test cases in a test management tool. The possibilities are endless, and the key is to experiment and find what works best for your specific use case.
+          
+          
+        </div>
+
+        <a class="back-link" href="../index.html">Back to all posts</a>
+      </article>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/scripts.js"></script>
+  </body>
+</html>
