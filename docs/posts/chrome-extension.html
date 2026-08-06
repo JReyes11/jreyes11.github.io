@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-GLZF9DT8Q5"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-GLZF9DT8Q5");
+    </script>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta
+      name="description"
+      content="Leveraging Google Gemini to create a self-healing layer for Playwright tests."
+    />
+    <meta name="author" content="Jose Reyes" />
+    <title>Chrome Extensions | Jose Reyes</title>
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico" />
+    <script
+      src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Muli:400,400i,700,800"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="../css/styles.css" rel="stylesheet" />
+    <script src="../components/header.js"></script>
+  </head>
+  <body data-base-path="..">
+    <main class="content-shell post-page">
+      <article class="post-article">
+        <div class="post-article-meta">
+          <time datetime="2026-08-05">Aug 5, 2026</time>
+          <span class="post-tag">Chrome Extensions</span>
+          <span class="post-tag">JavaScript</span>
+          <span class="post-tag">Google Gemini</span>
+          <span class="post-tag">AI</span>
+        </div>
+        <br />
+        <h3>Fun with Chrome Extensions</h3>
+
+        <div class="post-content">
+          <p>
+            In my previous post, I worked on leveraging AI to generate test cases based on a Github Diff. 
+            I wanted to take this a step further, so I built a Chrome Extension to accomplish this process in 3 clicks.   
+            <br><br>
+
+            <b>The last time I build a Chrome extension...</b><br>
+            A few years ago while working as an SDET at a Healthcare company, I built a chrome extension that was used internally
+            by many of the Quality Engineers and Developers cross-functionally. The tool was built to solve the lengthy cumbersome process
+            of generating internal serial numbers - which were required when testing the purchase and product registration workflows in the 
+            lower environments. <br><br>The tool allowed this process to be reduced into a 2-click process that would complete in under 15 seconds by leveraging
+            a number of internal API's. 
+
+            <br><br><b>Fast forward to present day...</b><br>
+            Building this Chrome extension was different, in the sense that the goal is to leverage AI, via an API to generate test cases
+            based on a Github diff. The value this tool offers is a no-nonsense process in which Quality Engineers can quickly get an idea on 
+            areas of focus when testing changes in a pull request.
+
+            <br><br><b>Challenges</b><br>
+            There is limited real estate when working with chrome extensions, so the design must be thoughtful and intuitive. As much as I secretly
+            wish I were a UI Designer, I initially struggled with the layout. How can I fit the following...
+            <ul>
+              <li>Allow the user to select from a collection of repositories.</li>
+            </ul>
+            
+            
+            
+            concept of how the test case results should be rendered. I came to the conclusion
+            that once the test cases were generated, I should allow the user to download them locally.
+            <br><br>
+            Next I had to decide the format in which to save the test case results returned by Gemini AI. I want this to be a tool that users rely on, so 
+            I decided to save the results in an HTML document that contains a table and a search field that could be used to filter the test cases.
+            This led me down the road of using "DataTables", which made this process almost effortless.
+
+            <br><br><b>Time for a Demo</b><br>
+
+            <img
+            src="../assets/img/ChromeExt-CloseUp.gif"
+            ,
+            width="600"
+            height="800"
+            alt="Chrome Extension"
+          />
+
+            
+                               
+
+          <br /><br />
+          Opening the downloaded test report...
+
+          <img
+            src="../assets/img/chrome-ext-report.png"
+            ,
+            width="1000"
+            height="800"
+            alt="Test Case report created by Gemini"
+          />
+
+        
+        
+
+
+          <hr />
+          <h4>Conclusion</h4>
+         
+        </div>
+
+        <a class="back-link" href="../index.html">Back to all posts</a>
+      </article>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/scripts.js"></script>
+  </body>
+</html>
