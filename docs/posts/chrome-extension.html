@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-GLZF9DT8Q5"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-GLZF9DT8Q5");
+    </script>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta
+      name="description"
+      content="Fun with Chrome Extensions"
+    />
+    <meta name="author" content="Jose Reyes" />
+    <title>josereyes.dev | Chrome Extensions</title>
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico" />
+    <script
+      src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Muli:400,400i,700,800"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="../css/styles.css" rel="stylesheet" />
+    <script src="../components/header.js"></script>
+  </head>
+  <body data-base-path="..">
+    <main class="content-shell post-page">
+      <article class="post-article">
+        <div class="post-article-meta">
+          <time datetime="2026-08-05">Aug 5, 2026</time>
+          <span class="post-tag">Chrome Extensions</span>
+          <span class="post-tag">JavaScript</span>
+          <span class="post-tag">Google Gemini</span>
+          <span class="post-tag">AI</span>
+        </div>
+        <br />
+        <h3>Fun with Chrome Extensions</h3>
+
+        <div class="post-content">
+          <p>
+           In my previous post I outlined the process of retrieving a diff for a PR in GitHub and passing it to an LLM to generate
+detailed test cases based on the pull request. Shortly afterward, I had the idea of bundling the entire end-to-end
+process into a Google Chrome extension.
+
+<br><br><b>The last time I built a Chrome extension...</b><br>
+A few years ago, while working as an SDET at a healthcare company, I built a Chrome extension used internally by
+Quality Engineers and Developers across teams. It solved the lengthy, cumbersome process of generating internal
+serial numbers — required for testing purchase and product registration workflows in lower environments. By
+leveraging a handful of internal APIs, the tool reduced that process to two clicks and under 15 seconds.
+
+<br><br><b>Fast forward to present day...</b><br>
+Building this extension was a different challenge. Chrome extensions don't give you much UI real estate, and I
+needed to render test cases with detailed steps, expected results, and preconditions — not exactly a small amount
+of content. Cramming all of that into a popup felt like the wrong approach, so I decided the results should instead
+be downloaded locally, where they'd have room to breathe.
+
+<br><br>
+That decision lined up well with the goal of the tool itself: use AI, via an API, to generate test cases from a
+GitHub diff, giving Quality Engineers a fast, no-nonsense way to see where to focus when testing a pull request.
+The extension just needed to get out of the way and hand off the results.
+
+<br><br><b>Challenges</b><br>
+Limited real estate means the design has to be thoughtful and intentional. As much as I secretly wish I were a UI
+designer, I struggled early on with the layout. How do I fit in:
+<ul>
+  <li>A way for the user to select from a collection of repositories</li>
+  <li>A clear, low-friction trigger to kick off diff retrieval and test case generation</li>
+  <li>Feedback while the diff is being fetched and processed by Gemini</li>
+</ul>
+
+
+Once I accepted that the results belonged outside the popup, the next question was format. I wanted this to be a
+tool people actually rely on, so I settled on saving the test cases as an HTML document — one with a table and a
+search field to filter results. That decision led me to DataTables, which made the whole thing almost effortless.
+
+<br><br><b>The Final Product</b>
+
+            <img
+            src="../assets/img/ChromeExt-CloseUp.gif"
+            ,
+            width="600"
+            height="800"
+            alt="Chrome Extension"
+          />
+
+          <br /><br />
+          A view of the downloaded HTML file that consists of the generated test cases.
+
+          <img
+            src="../assets/img/chrome-ext-report.gif"
+            ,
+            width="1000"
+            height="800"
+            alt="Test Case report created by Gemini"
+          />
+
+          <hr />
+          <h4>Conclusion</h4>
+         I can honestly say I am happy with how this project turned out. <br><br>
+         There is much to be desired in regards to the design, so I may revisit this again the future. 
+         <br>
+         Im grateful that Gemini AI has a free tier, although it is rate limited as one would expect. The good part -- they have numerous models to choose from, 
+         each with their own rate limits. Perhaps the next iteration will expose the various models for selection in the UI. 
+         The possibilities are endless.
+</p>
+        </div>
+
+        <a class="back-link" href="../index.html">Back to all posts</a>
+      </article>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/scripts.js"></script>
+  </body>
+</html>
