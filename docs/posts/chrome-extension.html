@@ -20,10 +20,10 @@
     />
     <meta
       name="description"
-      content="Leveraging Google Gemini to create a self-healing layer for Playwright tests."
+      content="Fun with Chrome Extensions"
     />
     <meta name="author" content="Jose Reyes" />
-    <title>Chrome Extensions | Jose Reyes</title>
+    <title>josereyes.dev | Chrome Extensions</title>
     <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico" />
     <script
       src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
@@ -57,39 +57,42 @@
 
         <div class="post-content">
           <p>
-            In my previous post, I worked on leveraging AI to generate test cases based on a Github Diff. 
-            I wanted to take this a step further, so I built a Chrome Extension to accomplish this process in 3 clicks.   
-            <br><br>
+           In my previous post I outlined the process of retrieving a diff for a PR in GitHub and passing it to an LLM to generate
+detailed test cases based on the pull request. Shortly afterward, I had the idea of bundling the entire end-to-end
+process into a Google Chrome extension.
 
-            <b>The last time I build a Chrome extension...</b><br>
-            A few years ago while working as an SDET at a Healthcare company, I built a chrome extension that was used internally
-            by many of the Quality Engineers and Developers cross-functionally. The tool was built to solve the lengthy cumbersome process
-            of generating internal serial numbers - which were required when testing the purchase and product registration workflows in the 
-            lower environments. <br><br>The tool allowed this process to be reduced into a 2-click process that would complete in under 15 seconds by leveraging
-            a number of internal API's. 
+<br><br><b>The last time I built a Chrome extension...</b><br>
+A few years ago, while working as an SDET at a healthcare company, I built a Chrome extension used internally by
+Quality Engineers and Developers across teams. It solved the lengthy, cumbersome process of generating internal
+serial numbers — required for testing purchase and product registration workflows in lower environments. By
+leveraging a handful of internal APIs, the tool reduced that process to two clicks and under 15 seconds.
 
-            <br><br><b>Fast forward to present day...</b><br>
-            Building this Chrome extension was different, in the sense that the goal is to leverage AI, via an API to generate test cases
-            based on a Github diff. The value this tool offers is a no-nonsense process in which Quality Engineers can quickly get an idea on 
-            areas of focus when testing changes in a pull request.
+<br><br><b>Fast forward to present day...</b><br>
+Building this extension was a different challenge. Chrome extensions don't give you much UI real estate, and I
+needed to render test cases with detailed steps, expected results, and preconditions — not exactly a small amount
+of content. Cramming all of that into a popup felt like the wrong approach, so I decided the results should instead
+be downloaded locally, where they'd have room to breathe.
 
-            <br><br><b>Challenges</b><br>
-            There is limited real estate when working with chrome extensions, so the design must be thoughtful and intuitive. As much as I secretly
-            wish I were a UI Designer, I initially struggled with the layout. How can I fit the following...
-            <ul>
-              <li>Allow the user to select from a collection of repositories.</li>
-            </ul>
-            
-            
-            
-            concept of how the test case results should be rendered. I came to the conclusion
-            that once the test cases were generated, I should allow the user to download them locally.
-            <br><br>
-            Next I had to decide the format in which to save the test case results returned by Gemini AI. I want this to be a tool that users rely on, so 
-            I decided to save the results in an HTML document that contains a table and a search field that could be used to filter the test cases.
-            This led me down the road of using "DataTables", which made this process almost effortless.
+<br><br>
+That decision lined up well with the goal of the tool itself: use AI, via an API, to generate test cases from a
+GitHub diff, giving Quality Engineers a fast, no-nonsense way to see where to focus when testing a pull request.
+The extension just needed to get out of the way and hand off the results.
 
-            <br><br><b>Time for a Demo</b><br>
+<br><br><b>Challenges</b><br>
+Limited real estate means the design has to be thoughtful and intentional. As much as I secretly wish I were a UI
+designer, I struggled early on with the layout. How do I fit in:
+<ul>
+  <li>A way for the user to select from a collection of repositories</li>
+  <li>A clear, low-friction trigger to kick off diff retrieval and test case generation</li>
+  <li>Feedback while the diff is being fetched and processed by Gemini</li>
+</ul>
+
+
+Once I accepted that the results belonged outside the popup, the next question was format. I wanted this to be a
+tool people actually rely on, so I settled on saving the test cases as an HTML document — one with a table and a
+search field to filter results. That decision led me to DataTables, which made the whole thing almost effortless.
+
+<br><br><b>The Final Product</b>
 
             <img
             src="../assets/img/ChromeExt-CloseUp.gif"
@@ -99,11 +102,8 @@
             alt="Chrome Extension"
           />
 
-            
-                               
-
           <br /><br />
-          Opening the downloaded test report...
+          A view of the downloaded HTML file that consists of the generated test cases.
 
           <img
             src="../assets/img/chrome-ext-report.png"
@@ -113,13 +113,15 @@
             alt="Test Case report created by Gemini"
           />
 
-        
-        
-
-
           <hr />
           <h4>Conclusion</h4>
-         
+         I can honestly say I am happy with how this project turned out. <br><br>
+         There is much to be desired in regards to the design, so I may revisit this again the future. 
+         <br>
+         Im grateful that Gemini AI has a free tier, although it is rate limited as one would expect. The good part -- they have numerous models to choose from, 
+         each with their own rate limits. Perhaps the next iteration will expose the various models for selection in the UI. 
+         The possibilities are endless.
+</p>
         </div>
 
         <a class="back-link" href="../index.html">Back to all posts</a>
