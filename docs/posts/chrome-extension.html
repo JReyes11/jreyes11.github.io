@@ -58,41 +58,58 @@
         <div class="post-content">
           <p>
            In my previous post I outlined the process of retrieving a diff for a PR in GitHub and passing it to an LLM to generate
-detailed test cases based on the pull request. Shortly afterward, I had the idea of bundling the entire end-to-end
-process into a Google Chrome extension.
+            detailed test cases based on the pull request. Shortly afterward, I had the idea of bundling the entire end-to-end
+            process into a Google Chrome extension, allowing the process to be completed with a few clicks of a button.
 
-<br><br><b>The last time I built a Chrome extension...</b><br>
+            <br /><br />
+            For reference, This was my thought process for generating detailed test cases using an LLM/AI, based on a Diff from a pull request in Github.
+            <br><br>
+            
+            <img
+              src="../assets/img/Git-diff-llm-test-cases.png"
+              alt="Workflow diagram showing how to generate test cases using a large language model (LLM) and a Git diff"
+            />
+
+<hr>
+<h4>A Bit of History</h4>
 A few years ago, while working as an SDET at a healthcare company, I built a Chrome extension used internally by
 Quality Engineers and Developers across teams. It solved the lengthy, cumbersome process of generating internal
 serial numbers — required for testing purchase and product registration workflows in lower environments. By
 leveraging a handful of internal APIs, the tool reduced that process to two clicks and under 15 seconds.
 
-<br><br><b>Fast forward to present day...</b><br>
-Building this extension was a different challenge. Chrome extensions don't give you much UI real estate, and I
-needed to render test cases with detailed steps, expected results, and preconditions — not exactly a small amount
-of content. Cramming all of that into a popup felt like the wrong approach, so I decided the results should instead
-be downloaded locally, where they'd have room to breathe.
+<hr>
+
+<h4>Fast forward to present day</h4>
+Since the goal of this chrome extension is to deliver detailed test cases with preconditions and expected results, I needed to figure out
+how this should be rendered in the UI. Chome extensions do not have much real estate in the UI, so rendering large amounts of data in a manner 
+that can be digested by the user is unrealistic, in my opinion. 
+<br><br>
+I decided the best course of action was to allow the user to download the test cases once Gemini AI returned a response. This presents another
+challenge - How should I organize the data in the downloaded file? I immediately thought of excel, but what if the user does not have this installed 
+on their machine? Sure - there are alternatives, but I did not want the user to jump through unnecessary hoops.
+<br><br>
+Everyone has a web browser installed on their machine, regardless of their operating system. With this in mind, I decided to format the response returned
+by Gemini AI to build an HTML document that renders a table with the expected test cases. I leveraged "dataTables" via a CDN to do the heavy lifting in 
+regards to formatting, which was a game changer.
 
 <br><br>
-That decision lined up well with the goal of the tool itself: use AI, via an API, to generate test cases from a
-GitHub diff, giving Quality Engineers a fast, no-nonsense way to see where to focus when testing a pull request.
-The extension just needed to get out of the way and hand off the results.
+Another challenge - due to the limited space with in the UI - was figuring out how to let the user know a request was in progress. 
+Since I am using Bootstrap (v5.3.3), I could simply use a spinner while a request is in progress, but where should this be rendered?
+I decided the best course of action was to reuse the existing elements in the UI and overwrite them depending on the action the tool was performing.
+This allowed me to save space and keep the UI a bit cleaner than some of the alternatives I had previously explored.
 
-<br><br><b>Challenges</b><br>
-Limited real estate means the design has to be thoughtful and intentional. As much as I secretly wish I were a UI
-designer, I struggled early on with the layout. How do I fit in:
+<hr>
+
+<h4>Chrome Extension Demo</h4>
+<b>Workflow</b>
 <ul>
-  <li>A way for the user to select from a collection of repositories</li>
-  <li>A clear, low-friction trigger to kick off diff retrieval and test case generation</li>
-  <li>Feedback while the diff is being fetched and processed by Gemini</li>
+  <li>User clicks on the Chrome extension icon in the browser.</li>
+  <li>User selects the desired repository in Github</li>
+  <li>Pull Requests with an open status are returned.</li>
+  <li>User selects Pull Request and downloads the Diff.</li>
+  <li>User clicks on Generate button, which sends the Diff to Gemini AI</li>
+  <li>The OS Native download window automatically appears, allowing the user to save the test case results.</li>
 </ul>
-
-
-Once I accepted that the results belonged outside the popup, the next question was format. I wanted this to be a
-tool people actually rely on, so I settled on saving the test cases as an HTML document — one with a table and a
-search field to filter results. That decision led me to DataTables, which made the whole thing almost effortless.
-
-<br><br><b>The Final Product</b>
 
             <img
             src="../assets/img/ChromeExt-CloseUp.gif"
@@ -102,8 +119,10 @@ search field to filter results. That decision led me to DataTables, which made t
             alt="Chrome Extension"
           />
 
-          <br /><br />
-          A view of the downloaded HTML file that consists of the generated test cases.
+          <br /><b>Viewing the Downloaded Test Cases</b>
+          Once the file has been downloaded, the user can open the html file to view the generated test cases.
+          <br>For reference, I decided to include the Github repository and Pull Request number at the top of the page. 
+          <br>Since I am using "dataTables", the "search" text field was an option I thought would be useful to include.
 
           <img
             src="../assets/img/chrome-ext-report.gif"
@@ -116,11 +135,14 @@ search field to filter results. That decision led me to DataTables, which made t
           <hr />
           <h4>Conclusion</h4>
          I can honestly say I am happy with how this project turned out. <br><br>
-         There is much to be desired in regards to the design, so I may revisit this again the future. 
-         <br>
-         Im grateful that Gemini AI has a free tier, although it is rate limited as one would expect. The good part -- they have numerous models to choose from, 
-         each with their own rate limits. Perhaps the next iteration will expose the various models for selection in the UI. 
-         The possibilities are endless.
+         My goal was to build something that took the stress out of analyzing a pull request to determine areas of focus.
+        There were a number of decisions I had to make along the way - and a number of good alternatives I passed on. 
+        <br>I can see myself revisiting this project again in the near future... perhaps introducing an option that allows the user
+        to select from various AI models.
+        <br><br>
+        I hope you have enjoyed this post. Thanks for watching!
+
+        
 </p>
         </div>
 
