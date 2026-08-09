@@ -11472,10 +11472,11 @@ body {
   --surface: rgba(255, 255, 255, 0.82);
   --surface-strong: #ffffff;
   --ink: #182026;
+  --heading: #15314a;
   --muted: #5f6b76;
   --line: rgba(24, 32, 38, 0.12);
-  --accent: #d96c3f;
-  --accent-deep: #b9532c;
+  --accent: #a34726;
+  --accent-deep: #a34726;
   --tag-bg: rgba(58, 136, 203, 0.12);
 }
 
@@ -11496,6 +11497,21 @@ html {
 body {
   color: var(--ink);
   background: transparent;
+}
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
+  color: var(--heading);
 }
 
 body::before {
@@ -11686,7 +11702,7 @@ body::before {
   margin-bottom: 1rem;
   font-size: clamp(3.6rem, 6vw, 5.9rem);
   line-height: 0.95;
-  color: #15314a;
+  color: var(--heading);
 }
 
 .page-intro,
@@ -11798,7 +11814,7 @@ body::before {
 }
 
 .post-card h2 a {
-  color: #15314a;
+  color: var(--heading);
   text-decoration: none;
 }
 
