@@ -25,7 +25,8 @@ watcher.on('ready', () => {
     console.log(' READY TO ROLL!');
 });
 
-_handleSCSS();
+// Do not compile SCSS on startup: `npm start` serves the existing docs output
+// and must not overwrite a manually maintained docs/css/styles.css file.
 
 function _processFile(filePath, watchEvent) {
     
