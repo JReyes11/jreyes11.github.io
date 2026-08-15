@@ -350,6 +350,13 @@ img {
   height: auto;
 }
 
+#img-mid {
+  max-width: 500px;
+  height: 469px;
+    text-align: left;
+    vertical-align: left;
+}
+
 table {
   caption-side: bottom;
   border-collapse: collapse;
