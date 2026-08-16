@@ -60,10 +60,11 @@
            In my previous post I outlined the process of retrieving a diff for a PR in GitHub and passing it to an LLM to generate
             detailed test cases based on the pull request. Shortly afterward, I had the idea of bundling the entire end-to-end
             process into a Google Chrome extension, allowing the process to be completed with a few clicks of a button.
-
-            <br /><br />
+            </p>
+           
+            <p>
             For reference, This was my thought process for generating detailed test cases using an LLM/AI, based on a Diff from a pull request in Github.
-            <br><br>
+           </p>
             
             <img
               src="../assets/img/Git-diff-llm-test-cases.png"
@@ -72,36 +73,46 @@
 
 <hr>
 <h4>A Bit of History</h4>
+<p>
 A few years ago, while working as an SDET at a healthcare company, I built a Chrome extension used internally by
 Quality Engineers and Developers across teams. It solved the lengthy, cumbersome process of generating internal
 serial numbers — required for testing purchase and product registration workflows in lower environments. By
 leveraging a handful of internal APIs, the tool reduced that process to two clicks and under 15 seconds.
+</p>
 
 <hr>
-
 <h4>Fast forward to present day</h4>
+<p>
 Since the goal of this chrome extension is to deliver detailed test cases with preconditions and expected results, I needed to figure out
 how this should be rendered in the UI. Chome extensions do not have much real estate in the UI, so rendering large amounts of data in a manner 
 that can be digested by the user is unrealistic, in my opinion. 
-<br><br>
+</p>
+
+<p>
 I decided the best course of action was to allow the user to download the test cases once Gemini AI returned a response. This presents another
 challenge - How should I organize the data in the downloaded file? I immediately thought of excel, but what if the user does not have this installed 
 on their machine? Sure - there are alternatives, but I did not want the user to jump through unnecessary hoops.
-<br><br>
+</p>
+
+<p>
 Everyone has a web browser installed on their machine, regardless of their operating system. With this in mind, I decided to format the response returned
 by Gemini AI to build an HTML document that renders a table with the expected test cases. I leveraged "dataTables" via a CDN to do the heavy lifting in 
 regards to formatting, which was a game changer.
+</p>
 
-<br><br>
+<p>
 Another challenge - due to the limited space with in the UI - was figuring out how to let the user know a request was in progress. 
 Since I am using Bootstrap (v5.3.3), I could simply use a spinner while a request is in progress, but where should this be rendered?
 I decided the best course of action was to reuse the existing elements in the UI and overwrite them depending on the action the tool was performing.
 This allowed me to save space and keep the UI a bit cleaner than some of the alternatives I had previously explored.
+</p>
 
 <hr>
-
 <h4>Chrome Extension Demo</h4>
-<b>Workflow</b>
+<p>
+  I wanted the workflow to be simple and straight forward. This is the end result:
+</p>
+
 <ul>
   <li>User clicks on the Chrome extension icon in the browser.</li>
   <li>User selects the desired repository in Github</li>
@@ -110,7 +121,8 @@ This allowed me to save space and keep the UI a bit cleaner than some of the alt
   <li>User clicks on Generate button, which sends the Diff to Gemini AI</li>
   <li>The OS Native download window automatically appears, allowing the user to save the test case results.</li>
 </ul>
-  <div id="img-mid">
+  
+<div id="img-mid">
     <img src="../assets/img/ChromeExt-CloseUp.gif"
             ,
             width="500"
@@ -118,10 +130,44 @@ This allowed me to save space and keep the UI a bit cleaner than some of the alt
             alt="Chrome Extension"
           />
     </div>
-          <br /><b>Viewing the Downloaded Test Cases</b>
-          Once the file has been downloaded, the user can open the html file to view the generated test cases.
-          <br>For reference, I decided to include the Github repository and Pull Request number at the top of the page. 
-          <br>Since I am using "dataTables", the "search" text field was an option I thought would be useful to include.
+
+<p>
+  What happening under the hood:
+  <ul>
+  <li>The list of Github repositories displayed in the dropdown menu are retrieved from a local json file. 
+    <ul>
+      <li>
+        This makes the process of adding/removing effortless as the chrome extension imports the list on load.
+      </li>
+    </ul>
+  </li>
+  <li>Only pull requests with a status of "Open" are retrieved. 
+    <ul>
+      <li>
+        This was intentional, as the purpose of the tool is to generate test cases for code that is to be tested.
+      </li>
+    </ul>    
+  </li>
+  <li>The diff is downloaded, but not displayed in the UI, as I believe this offers no value to the user.</li>
+  <li>The current Gemini Model used is "gemini-3.5-flash". 
+    <ul>
+      <li>
+        This value is saved as a string and can easily be modified as needed to access a desired model if needed
+      </li>
+    </ul> 
+    </li>
+</ul>
+</p>
+<hr>
+          <h4>Viewing the Downloaded Test Cases</h4>
+          <p>
+            Once the file has been downloaded, the user can open the html file to view the generated test cases.
+          </p>
+          
+          <p>
+          For reference, I decided to include the Github repository and Pull Request number at the top of the page. 
+          Since I am using "dataTables", the "search" text field was an option I thought would be useful to include.                
+        </p>
 
           <img
             src="../assets/img/chrome-ext-report.gif"
@@ -130,26 +176,34 @@ This allowed me to save space and keep the UI a bit cleaner than some of the alt
             height="800"
             alt="Test Case report created by Gemini"
           />
+
          <hr>
          <h4>The Vetting Process</h4>
-        
+        <p>
           As noted in my previous post, it's important to vet the quality and relevance of the generated test cases.
-          <br><br>
+        </p>
+         
+        <p>
           AI can make mistakes - and sometimes create scenarios that do not add value and/or are irrelevant to the task at hand. 
           Be sure to review the generated test scenarios thoroughly as opposed to trusting them blindly. This process is intended
           to assist - as opposed to replacing our keen sense of quality.
-          <br><br>
+        </p>
+    
           <hr />
           <h4>Conclusion</h4>
-         I can honestly say I am happy with how this project turned out. <br><br>
-         My goal was to build something that took the stress out of analyzing a pull request to determine areas of focus.
+          <p>
+            I can honestly say I am happy with how this project turned out. 
+          </p>
+          <p>
+        My goal was to build something that took the stress out of analyzing a pull request to determine areas of focus.
         There were a number of decisions I had to make along the way - and a number of good alternatives I passed on. 
-        <br>I can see myself revisiting this project again in the near future... perhaps introducing an option that allows the user
+        I can see myself revisiting this project again in the near future... perhaps introducing an option that allows the user
         to select from various AI models.
-        <br><br>
-        I hope you have enjoyed this post. Thanks for watching!
-
         
+      </p>
+        <p>
+          I hope you have enjoyed this post.
+        </p>          
 </p>
  <a class="back-link" href="../index.html">Back to all posts</a>
         </div>
